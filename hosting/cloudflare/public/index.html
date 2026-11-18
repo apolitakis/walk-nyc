@@ -82,6 +82,35 @@ h2.area{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(-
 .go{flex:none;font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:6px 8px;text-decoration:none}
 .numdot{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;border:2px solid}
 
+/* Go deeper: chapters under each stop, in the now-playing sheet, and by topic */
+.stop{flex-wrap:wrap;row-gap:4px}
+.deep{flex:none;width:calc(100% - 42px);margin-left:42px}
+.deeptog{font-size:13.5px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 0}
+.deeptog .car{display:inline-block;transition:transform .2s;font-size:11px}
+.deep.open .deeptog .car{transform:rotate(180deg)}
+.deep .chs{display:none}
+.deep.open .chs{display:block}
+.chs{list-style:none;margin:4px 0 2px;padding:0}
+.ch{display:flex;width:100%;text-align:left;padding:9px 0 9px 12px;border-left:2px solid var(--line)}
+.ch:active{background:var(--card)}
+.ch .cb{flex:1;min-width:0}
+.ch .ct{display:block;font-size:15px;line-height:1.3;font-weight:500}
+.ch .cx{display:block;font-size:12.5px;color:var(--muted);font-weight:400;margin-bottom:1px}
+.ch .cm{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:3px}
+.ch .lens{text-transform:uppercase;letter-spacing:.8px;font-weight:700;font-size:10.5px;padding-top:1px}
+.ch .chk{color:var(--ok)}
+.ch.cur{border-left-color:var(--accent)}
+.ch.cur .ct{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 13px;font-size:14px}
+.chip span{color:var(--muted);margin-left:3px;font-size:12.5px}
+.chip:active{background:var(--card2)}
+.hint2{color:var(--muted);font-size:13px;line-height:1.4;margin:10px 2px 0}
+h2.tgrp{display:flex;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-size:15px;color:var(--fg)}
+.npdeep{margin:28px 0 10px;padding-top:16px;border-top:1px solid var(--line)}
+.npdeep .npdh{font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);font-weight:700;margin-bottom:6px}
+.nplens{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);font-weight:700;margin:0 0 12px}
+
 /* Player */
 #player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#000;border-top:1px solid #333;padding:8px 12px calc(8px + var(--safe-b))}
 #player .row{display:flex;align-items:center;gap:10px;max-width:720px;margin:0 auto}
@@ -208,6 +237,11 @@ h2.area{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(-
     </div>
     <div class="field toggle hidden" id="recRow"><span>Use the recorded voice<br><span class="hint" style="display:block;margin-top:2px" id="recInfo"></span></span><input type="checkbox" id="recIn"></div>
     <div class="field toggle"><span>Keep going to the next track when one finishes<br><span class="hint" style="display:block;margin-top:2px">For listening at home. Walking mode waits for you to arrive.</span></span><input type="checkbox" id="autoNextIn"></div>
+    <div class="field">
+      <label for="deepSel">Go deeper chapters</label>
+      <select id="deepSel"><option value="offer">Offer them when a stop ends</option><option value="auto">Play them after each stop</option><option value="hide">Hide them</option></select>
+      <div class="hint">Most stops have a few extra chapters: more history, people, companies, names, food, and details to look for. If you reach the next stop during a chapter, the stop plays when the chapter ends.</div>
+    </div>
     <div class="field"><button class="btn" id="testVoice">Test voice</button></div>
     <div class="field"><button class="btn danger" id="resetBtn">Reset listening progress</button></div>
     <div class="field"><button class="btn primary" id="closeSheet">Done</button></div>
@@ -227,9 +261,26 @@ const S={
   track:null, chunks:[], ci:0, playing:false, token:0, chunkStart:0,
   walk:null, triggered:{}, queue:null, pos:null, watchId:null, wake:null,
   voices:[], map:null, mapLayers:null, audio:null, lastKeepAlive:0,
-  settings:{rate:1, voiceURI:"", radius:50, size:17, autoNext:false},
-  played:{}, resume:{}
+  settings:{rate:1, voiceURI:"", radius:50, size:17, autoNext:false, deeper:"offer"},
+  played:{}, resume:{}, openDeep:{}, list:null, lens:null
 };
+/* "Go deeper" chapter topics. build.py has the same ids (LENSES) and checks content/deeper/ against them. */
+const LENSES=[
+  {id:"history",label:"History",desc:"The longer story of each place, era by era."},
+  {id:"people",label:"People",desc:"Fuller portraits of the famous and the forgotten."},
+  {id:"companies",label:"Companies & money",desc:"Storied firms, industries, and the deals behind the buildings."},
+  {id:"architecture",label:"Architecture",desc:"Architects, styles, materials, and how to read a facade."},
+  {id:"nature",label:"Parks & nature",desc:"Landscape design, trees, birds, rock and water."},
+  {id:"look",label:"Look closer",desc:"Small details to find right where you're standing."},
+  {id:"underfoot",label:"Under your feet",desc:"Buried streams, old shorelines, tunnels, pipes and trains."},
+  {id:"names",label:"Names",desc:"Where the street and place names come from."},
+  {id:"food",label:"Food & drink",desc:"Dishes, markets and bars, and the people who brought them."},
+  {id:"politics",label:"Power & politics",desc:"Tammany, the mob, reformers, riots, and fights over who the city is for."},
+  {id:"culture",label:"Arts & pop culture",desc:"Music, art, theater, books, film and TV tied to each spot."},
+  {id:"legends",label:"Legends, checked",desc:"Popular stories, compared with the record."}
+];
+const LENS=Object.fromEntries(LENSES.map(l=>[l.id,l]));
+const lensLabel=id=>(LENS[id]||{label:id}).label;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -357,24 +408,35 @@ function currentVoice(){return S.voices.find(v=>v.voiceURI===S.settings.voiceURI
 if(synth){loadVoices();synth.onvoiceschanged=loadVoices;}
 
 /* ---------- playback engine ---------- */
-const key=(t,i)=>t+":"+i;
-function trackInfo(tourId,idx){const t=S.byId[tourId];if(idx<0)return{title:"Overview: "+t.title,text:t.overview,t};const s=t.stops[idx];return{title:(idx+1)+". "+s.title,text:s.text,t,s};}
+// Track keys: "<tour>:-1" overview, "<tour>:<i>" stop i, "<tour>:<i>:<d>" deeper chapter d (1-based) of stop i.
+const key=(t,i,d)=>t+":"+i+(d?":"+d:"");
+const sameTr=(a,b)=>a.tourId===b.tourId&&a.idx===b.idx&&(a.d||0)===(b.d||0);
+function chaptersOf(tourId,idx){const t=S.byId[tourId],s=t&&idx>=0&&t.stops[idx];return(s&&s.deeper)||[];}
+const deeperOn=()=>S.settings.deeper!=="hide";
+function trackInfo(tourId,idx,d){const t=S.byId[tourId];if(idx<0)return{title:"Overview: "+t.title,ctx:t.title,text:t.overview,t};const s=t.stops[idx];
+  if(d){const chs=s.deeper||[],c=chs[d-1];if(c)return{title:c.title,ctx:`Go deeper ${d}/${chs.length} · ${idx+1}. ${s.title}`,text:c.text,t,s,c};}
+  return{title:(idx+1)+". "+s.title,ctx:t.title,text:s.text,t,s};}
 /* Recorded narration (audio/manifest.json, made by the render scripts) is used when present; phone speech otherwise. */
 const AEL=new Audio();AEL.preload="auto";
 function recFor(k){return(S.settings.recorded!==false&&S.audioMan&&S.audioMan.tracks[k])||null;}
-function playTrack(tourId,idx,autoplay){
+// d: deeper chapter number (0 or omitted for the stop itself). list: a playlist (topic view) to keep following.
+function playTrack(tourId,idx,autoplay,d,list){
   stopSpeech();
-  const info=trackInfo(tourId,idx);S.track={tourId,idx};const k=key(tourId,idx);
+  d=d||0;if(d&&!chaptersOf(tourId,idx)[d-1])d=0;S.list=list||null;
+  const info=trackInfo(tourId,idx,d);S.track={tourId,idx,d};const k=key(tourId,idx,d);
   const rec=recFor(k);S.mode=rec?"audio":"tts";S.chunks=[];
   if(rec){rec.s.forEach(([p,t,text])=>S.chunks.push({text,p,t}));AEL.src=rec.file;AEL.playbackRate=S.settings.rate;}
   else{const paras=info.text.split(/\n\s*\n/);
     paras.forEach((p,pi)=>splitSentences(p.replace(/\s+/g," ").trim()).forEach(s=>{S.chunks.push({text:s,p:pi});}));}
   S.ci=(S.resume[k]&&S.resume[k]<S.chunks.length-1)?S.resume[k]:0;
   if(rec&&S.ci)AEL.currentTime=S.chunks[S.ci].t;
+  if(d&&S.view==="tour"&&S.tourId===tourId&&!S.openDeep[key(tourId,idx)]){S.openDeep[key(tourId,idx)]=1;const el=document.querySelector(`.deep[data-deep="${idx}"]`);if(el)el.classList.add("open");}
   renderTranscript();updatePlayer();setMediaSession(info);
   if(autoplay!==false)play();
-  if(S.view==="tour")markCurrentStop();
+  markCurrent();
 }
+// Play a track reference ({tourId,idx,d}), staying in the current playlist if it's part of it.
+function playRef(r,autoplay){playTrack(r.tourId,r.idx,autoplay!==false,r.d,S.list&&S.list.some(x=>sameTr(x,r))?S.list:null);}
 function play(){
   if(!S.track)return;unlockAudio();
   if(S.mode==="audio"){AEL.playbackRate=S.settings.rate;AEL.play().then(()=>{S.playing=true;updatePlayer();}).catch(()=>{S.playing=false;updatePlayer();toast("Tap ▶ to start the audio.");});S.playing=true;updatePlayer();return;}
@@ -384,21 +446,21 @@ function pause(){S.playing=false;stopSpeech();updatePlayer();}
 function stopSpeech(){S.token++;try{synth&&synth.cancel();}catch(e){}try{if(!AEL.paused)AEL.pause();}catch(e){}}
 AEL.addEventListener("timeupdate",()=>{if(S.mode!=="audio"||!S.chunks.length)return;const ct=AEL.currentTime+0.05;let i=S.ci;
   while(i+1<S.chunks.length&&S.chunks[i+1].t<=ct)i++;while(i>0&&S.chunks[i].t>ct)i--;
-  if(i!==S.ci){S.ci=i;S.resume[key(S.track.tourId,S.track.idx)]=i;save();highlight();}updateProgress();});
+  if(i!==S.ci){S.ci=i;S.resume[key(S.track.tourId,S.track.idx,S.track.d)]=i;save();highlight();}updateProgress();});
 AEL.addEventListener("ended",()=>{if(S.mode==="audio"&&S.track)trackEnded();});
 AEL.addEventListener("pause",()=>{if(S.mode==="audio"&&S.playing&&!AEL.ended){S.playing=false;updatePlayer();}});
 AEL.addEventListener("play",()=>{if(S.mode==="audio"&&!S.playing){S.playing=true;updatePlayer();}});
 AEL.addEventListener("error",()=>{if(S.mode!=="audio"||!S.track)return;const tr=S.track;toast("Couldn't load the recording for this stop, so the phone voice will read it.");
-  S.audioMissing=S.audioMissing||{};S.audioMissing[key(tr.tourId,tr.idx)]=1;const was=S.playing;S.mode="tts";const ci=S.ci;
-  const info=trackInfo(tr.tourId,tr.idx);S.chunks=[];info.text.split(/\n\s*\n/).forEach((p,pi)=>splitSentences(p.replace(/\s+/g," ").trim()).forEach(s=>S.chunks.push({text:s,p:pi})));
+  S.audioMissing=S.audioMissing||{};S.audioMissing[key(tr.tourId,tr.idx,tr.d)]=1;const was=S.playing;S.mode="tts";const ci=S.ci;
+  const info=trackInfo(tr.tourId,tr.idx,tr.d);S.chunks=[];info.text.split(/\n\s*\n/).forEach((p,pi)=>splitSentences(p.replace(/\s+/g," ").trim()).forEach(s=>S.chunks.push({text:s,p:pi})));
   S.ci=Math.min(ci,S.chunks.length-1);renderTranscript();if(was&&synth){S.playing=true;speakChunk();}});
 const SILENT_WAV="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=";
 function unlockMedia(){if(!S.audioMan||S.playing)return;try{AEL.src=SILENT_WAV;const pr=AEL.play();if(pr)pr.then(()=>AEL.pause()).catch(()=>{});}catch(e){}}
 function setMediaSession(info){if(!("mediaSession" in navigator))return;try{
-  navigator.mediaSession.metadata=new MediaMetadata({title:info.title,artist:info.t.title,album:"Walk NYC",artwork:[{src:"icon-512.png",sizes:"512x512",type:"image/png"}]});
+  navigator.mediaSession.metadata=new MediaMetadata({title:info.title,artist:info.c?info.ctx:info.t.title,album:info.c?info.t.title:"Walk NYC",artwork:[{src:"icon-512.png",sizes:"512x512",type:"image/png"}]});
   const ms=navigator.mediaSession;ms.setActionHandler("play",()=>play());ms.setActionHandler("pause",()=>pause());
-  ms.setActionHandler("nexttrack",()=>{const n=S.track&&nextOf(S.track);if(n)playTrack(n.tourId,n.idx,true);});
-  ms.setActionHandler("previoustrack",()=>{const p=S.track&&prevOf(S.track);if(p)playTrack(p.tourId,p.idx,true);});
+  ms.setActionHandler("nexttrack",()=>{const n=S.track&&nextOf(S.track);if(n)playRef(n);});
+  ms.setActionHandler("previoustrack",()=>{const p=S.track&&prevOf(S.track);if(p)playRef(p);});
   ms.setActionHandler("seekbackward",()=>{if(S.mode==="audio")AEL.currentTime=Math.max(0,AEL.currentTime-15);else seek(S.ci-2);});
   ms.setActionHandler("seekforward",()=>{if(S.mode==="audio")AEL.currentTime=Math.min(AEL.duration||1e9,AEL.currentTime+15);else seek(S.ci+2);});
 }catch(e){}}
@@ -410,21 +472,41 @@ function speakChunk(){
   u.onerror=e=>{if(tok!==S.token)return;if(e.error==="interrupted"||e.error==="canceled")return;advance();};
   synth.speak(u);highlight();
 }
-function advance(){S.ci++;S.resume[key(S.track.tourId,S.track.idx)]=S.ci;save();speakChunk();updateProgress();}
+function advance(){S.ci++;S.resume[key(S.track.tourId,S.track.idx,S.track.d)]=S.ci;save();speakChunk();updateProgress();}
 function trackEnded(){
-  const k=key(S.track.tourId,S.track.idx);S.played[k]=1;delete S.resume[k];save();
+  const tr=S.track;const k=key(tr.tourId,tr.idx,tr.d);S.played[k]=1;delete S.resume[k];save();
   S.playing=false;S.token++;updatePlayer();refreshPlayedMarks();
+  // Arriving at a stop (walking mode) wins over anything else, including the rest of a stop's chapters.
   if(S.queue){const q=S.queue;S.queue=null;hideToast();chime();setTimeout(()=>playTrack(q.tourId,q.idx,true),900);return;}
-  const nx=nextOf(S.track);
-  if(!S.walk&&S.settings.autoNext&&nx){setTimeout(()=>playTrack(nx.tourId,nx.idx,true),1200);return;}
-  if(nx){const ni=trackInfo(nx.tourId,nx.idx);
-    if(S.walk&&S.pos&&nx.idx>=0){const d=dist(S.pos,ni.s);toast("Next: "+esc(ni.title)+" — "+fmtDist(d)+" "+bearing(S.pos,ni.s)+". It starts when you get there.","Play now",()=>playTrack(nx.tourId,nx.idx,true));}
-    else toast("Finished. Up next: "+esc(ni.title),"Play",()=>playTrack(nx.tourId,nx.idx,true));}
-  else toast("That's the end of this tour. Thanks for walking!");
+  const nx=nextOf(tr);
+  // A topic playlist keeps going; so do a stop's chapters once you've started them, or after the stop when set to "Play them".
+  if(nx&&(S.list||nx.d&&(tr.d||S.settings.deeper==="auto"))){setTimeout(()=>playRef(nx),1000);return;}
+  // Offer this stop's chapters, alongside the usual "what's next".
+  const chs=!tr.d&&tr.idx>=0&&deeperOn()?chaptersOf(tr.tourId,tr.idx):[];
+  const deep=chs.length?`Go deeper here: ${chs.length} chapter${chs.length>1?"s":""}, ${chaptersMin(tr.tourId,tr.idx)} min. `:"";
+  const goDeep=()=>playTrack(tr.tourId,tr.idx,true,1);
+  if(!S.walk&&S.settings.autoNext&&nx){setTimeout(()=>playRef(nx),1200);if(deep)toast(deep+"Playing the next stop.","Go deeper",goDeep);return;}
+  if(nx){const ni=trackInfo(nx.tourId,nx.idx,nx.d);
+    if(S.walk&&S.pos&&nx.idx>=0&&!nx.d){const d=dist(S.pos,ni.s);const msg="Next: "+esc(ni.title)+", "+fmtDist(d)+" "+bearing(S.pos,ni.s)+". It starts when you get there.";
+      if(deep)toast(deep+msg,"Go deeper",goDeep);else toast(msg,"Play now",()=>playRef(nx));}
+    else if(deep)toast(deep+"Or skip ahead to "+esc(ni.title)+".","Go deeper",goDeep);
+    else toast("Finished. Up next: "+esc(ni.title),"Play",()=>playRef(nx));}
+  else if(deep)toast(deep+"That was the last stop on this tour.","Go deeper",goDeep);
+  else toast(S.list?"That's every chapter on this topic.":"That's the end of this tour. Thanks for walking!");
 }
-function nextOf(tr){const t=S.byId[tr.tourId];if(tr.idx+1<t.stops.length)return{tourId:t.id,idx:tr.idx+1};return null;}
-function prevOf(tr){if(tr.idx>-1)return{tourId:tr.tourId,idx:tr.idx-1};return null;}
-function seek(ci){S.ci=Math.max(0,Math.min(ci,S.chunks.length-1));if(S.track)S.resume[key(S.track.tourId,S.track.idx)]=S.ci;save();
+function nextOf(tr){
+  if(S.list){const j=S.list.findIndex(x=>sameTr(x,tr));if(j>=0)return S.list[j+1]||null;}
+  const t=S.byId[tr.tourId];const n=chaptersOf(tr.tourId,tr.idx).length;
+  if(tr.d&&tr.d<n)return{tourId:t.id,idx:tr.idx,d:tr.d+1};
+  if(!tr.d&&tr.idx>=0&&n&&S.settings.deeper==="auto")return{tourId:t.id,idx:tr.idx,d:1};
+  if(tr.idx+1<t.stops.length)return{tourId:t.id,idx:tr.idx+1};return null;
+}
+function prevOf(tr){
+  if(S.list){const j=S.list.findIndex(x=>sameTr(x,tr));if(j>=0)return j>0?S.list[j-1]:null;}
+  if(tr.d)return tr.d>1?{tourId:tr.tourId,idx:tr.idx,d:tr.d-1}:{tourId:tr.tourId,idx:tr.idx};
+  if(tr.idx>-1)return{tourId:tr.tourId,idx:tr.idx-1};return null;
+}
+function seek(ci){S.ci=Math.max(0,Math.min(ci,S.chunks.length-1));if(S.track)S.resume[key(S.track.tourId,S.track.idx,S.track.d)]=S.ci;save();
   if(S.mode==="audio"){AEL.currentTime=S.chunks[S.ci].t;highlight();updateProgress();return;}
   if(S.playing){stopSpeech();speakChunk();}else highlight();updateProgress();}
 // Watchdog: some engines (notably Safari) occasionally drop onend; Chrome cuts long utterances.
@@ -440,32 +522,41 @@ function colorOf(id){return S.byId[id].color;}
 function updatePlayer(){
   if(!S.track){$("player").classList.add("hidden");return;}
   $("player").classList.remove("hidden");
-  const info=trackInfo(S.track.tourId,S.track.idx);
+  const info=trackInfo(S.track.tourId,S.track.idx,S.track.d);
   $("pTitle").textContent=info.title;$("npTitle").textContent=info.title;
-  const sub=info.t.title+(S.walk===info.t.id?" · walking":"");$("pSub").textContent=sub;$("npSub").textContent=sub;
+  const sub=info.ctx+(S.walk===info.t.id?" · walking":"");$("pSub").textContent=sub;$("npSub").textContent=sub;
   $("pPlay").innerHTML=S.playing?ICON_PAUSE:ICON_PLAY;$("npPlay").innerHTML=S.playing?ICON_PAUSE:ICON_PLAY;
   $("npRate").textContent=S.settings.rate.toFixed(2).replace(/0$/,"")+"×";
   updateProgress();
 }
 function updateProgress(){const aud=S.mode==="audio"&&AEL.duration>0;const p=aud?AEL.currentTime/AEL.duration*100:(S.chunks.length?(S.ci/S.chunks.length*100):0);$("progBar").style.width=p+"%";$("npProg").style.width=p+"%";
-  if(S.track){const m=aud?Math.max(1,Math.round((AEL.duration-AEL.currentTime)/60/S.settings.rate)):mins(S.chunks.slice(S.ci).reduce((a,c)=>a+words(c.text),0));const info=trackInfo(S.track.tourId,S.track.idx);$("pSub").textContent=info.t.title+" · "+m+" min left"+(S.walk===info.t.id?" · walking":"");}}
+  if(S.track){const m=aud?Math.max(1,Math.round((AEL.duration-AEL.currentTime)/60/S.settings.rate)):mins(S.chunks.slice(S.ci).reduce((a,c)=>a+words(c.text),0));const info=trackInfo(S.track.tourId,S.track.idx,S.track.d);$("pSub").textContent=info.ctx+" · "+m+" min left"+(S.walk===info.t.id?" · walking":"");}}
 function renderTranscript(){
-  const tr=$("transcript");let html="",lastP=-1;
+  const tr=$("transcript");let html="",lastP=-1;const T=S.track;
+  if(T&&T.d){const c=chaptersOf(T.tourId,T.idx)[T.d-1];if(c)html+=`<div class="nplens">${esc(lensLabel(c.lens))} · Go deeper ${T.d} of ${chaptersOf(T.tourId,T.idx).length}</div>`;}
   S.chunks.forEach((c,i)=>{if(c.p!==lastP){if(lastP>=0)html+="</p>";html+="<p>";lastP=c.p;}html+=`<span data-i="${i}">${esc(c.text)}</span> `;});
-  tr.innerHTML=html+"</p>";tr.scrollTop=0;highlight();
+  tr.innerHTML=html+"</p>"+npDeepHTML();tr.scrollTop=0;highlight();markCurrent();
 }
+// The stop's chapters, listed under the transcript of the stop or of any of its chapters.
+function npDeepHTML(){const T=S.track;if(!T||T.idx<0||!deeperOn())return"";const chs=chaptersOf(T.tourId,T.idx);if(!chs.length)return"";const t=S.byId[T.tourId];
+  return `<div class="npdeep"><div class="npdh">${T.d?"Chapters at this stop":"Go deeper here"} · ${chaptersMin(T.tourId,T.idx)} min</div><ol class="chs">${chs.map((c,n)=>chRow(t,T.idx,n+1)).join("")}</ol></div>`;}
 function highlight(){
   const spans=$("transcript").querySelectorAll("span[data-i]");
   spans.forEach(sp=>{const i=+sp.dataset.i;sp.classList.toggle("cur",i===S.ci);sp.classList.toggle("past",i<S.ci);});
   const cur=$("transcript").querySelector("span.cur");
   if(cur&&!$("np").classList.contains("hidden")){const tr=$("transcript");const r=cur.getBoundingClientRect(),R=tr.getBoundingClientRect();if(r.top<R.top+40||r.bottom>R.bottom-80)tr.scrollTo({top:tr.scrollTop+r.top-R.top-R.height*0.3,behavior:"smooth"});}
 }
-$("transcript").addEventListener("click",e=>{const sp=e.target.closest("span[data-i]");if(sp)seek(+sp.dataset.i);});
+$("transcript").addEventListener("click",e=>{const sp=e.target.closest("span[data-i]");if(sp){seek(+sp.dataset.i);return;}chapterClick(e);});
+// Chapter rows carry data-ch="<tour>|<stop index>|<chapter number>"; in the topic view they play as a playlist.
+function chapterClick(e){const b=e.target.closest("[data-ch]");if(!b)return false;const [tid,i,n]=b.dataset.ch.split("|");unlockAudio();
+  const r={tourId:tid,idx:+i,d:+n};
+  if(S.track&&sameTr(S.track,r)){togglePlay();return true;}
+  playTrack(r.tourId,r.idx,true,r.d,S.view==="topic"&&b.closest("#view")?topicList(S.lens):(S.list&&S.list.some(x=>sameTr(x,r))?S.list:null));return true;}
 function togglePlay(){if(S.playing)pause();else play();}
 $("pPlay").onclick=togglePlay;$("npPlay").onclick=togglePlay;
 $("pBack").onclick=()=>seek(S.ci-1);$("npBack").onclick=()=>seek(S.ci-1);$("npFwd").onclick=()=>seek(S.ci+1);
-$("pNext").onclick=$("npNext").onclick=()=>{if(!S.track)return;const n=nextOf(S.track);if(n)playTrack(n.tourId,n.idx,true);};
-$("npPrev").onclick=()=>{if(!S.track)return;if(S.ci>2){seek(0);return;}const p=prevOf(S.track);if(p)playTrack(p.tourId,p.idx,true);};
+$("pNext").onclick=$("npNext").onclick=()=>{if(!S.track)return;const n=nextOf(S.track);if(n)playRef(n);};
+$("npPrev").onclick=()=>{if(!S.track)return;if(S.ci>2){seek(0);return;}const p=prevOf(S.track);if(p)playRef(p);};
 $("openNp").onclick=()=>{$("np").classList.remove("hidden");document.body.style.overflow="hidden";setTimeout(highlight,50);};
 $("closeNp").onclick=()=>{$("np").classList.add("hidden");document.body.style.overflow="";};
 const RATES=[0.85,1,1.15,1.3];
@@ -478,32 +569,47 @@ function hideToast(){$("toast").classList.add("hidden");}
 
 /* ---------- views ---------- */
 function tourWords(t){return words(t.overview)+t.stops.reduce((a,s)=>a+words(s.text),0);}
-function trackMin(tid,idx,text){const r=recFor(key(tid,idx));return r?Math.max(1,Math.round(r.dur/60/S.settings.rate)):mins(words(text));}
+function trackMin(tid,idx,text,d){const r=recFor(key(tid,idx,d));return r?Math.max(1,Math.round(r.dur/60/S.settings.rate)):mins(words(text));}
 function tourMin(t){return trackMin(t.id,-1,t.overview)+t.stops.reduce((a,s,i)=>a+trackMin(t.id,i,s.text),0);}
+// Minutes of one stop's deeper chapters, and of a whole tour's.
+function chaptersMin(tid,idx){return chaptersOf(tid,idx).reduce((a,c,n)=>a+trackMin(tid,idx,c.text,n+1),0);}
+function tourDeepMin(t){return deeperOn()?t.stops.reduce((a,s,i)=>a+chaptersMin(t.id,i),0):0;}
+function fmtMin(m){return m<90?m+" min":(m/60).toFixed(1).replace(/\.0$/,"")+" hours";}
 function playedCount(t){let n=(S.played[key(t.id,-1)]?1:0);t.stops.forEach((s,i)=>{if(S.played[key(t.id,i)])n++;});return n;}
 function nearestStop(t){if(!S.pos)return null;let b=null;t.stops.forEach((s,i)=>{const d=dist(S.pos,s);if(!b||d<b.d)b={i,d};});return b;}
 function bulletHTML(t,sm){return `<span class="bullet${sm?" sm":""}${DARK_TEXT.has(t.color)?" dark":""}" style="background:${t.color}">${t.num}</span>`;}
+// One deeper chapter row. ctx: a line above the title naming the stop (topic view).
+function chRow(t,i,n,ctx){const c=t.stops[i].deeper[n-1];const done=S.played[key(t.id,i,n)];
+  return `<li><button class="ch" data-ch="${t.id}|${i}|${n}"><span class="cb">${ctx?`<span class="cx">${esc(ctx)}</span>`:""}<span class="ct">${esc(c.title)}</span><span class="cm">${ctx?"":`<span class="lens">${esc(lensLabel(c.lens))}</span>`}<span>${trackMin(t.id,i,c.text,n)} min</span>${done?'<span class="chk">✓ heard</span>':""}</span></span></button></li>`;}
+// The "Go deeper" toggle under a stop in the tour view, with its chapter list (closed until tapped).
+function deepHTML(t,i){const chs=t.stops[i].deeper;const heard=chs.filter((c,n)=>S.played[key(t.id,i,n+1)]).length;
+  return `<div class="deep${S.openDeep[key(t.id,i)]?" open":""}" data-deep="${i}"><button class="deeptog" data-tog="${i}">Go deeper · ${chs.length} chapter${chs.length>1?"s":""} · ${chaptersMin(t.id,i)} min${heard?` · ${heard}/${chs.length} heard`:""}<span class="car">▼</span></button><ol class="chs">${chs.map((c,n)=>chRow(t,i,n+1)).join("")}</ol></div>`;}
+function topicList(lens){const out=[];S.tours.forEach(t=>t.stops.forEach((s,i)=>(s.deeper||[]).forEach((c,n)=>{if(c.lens===lens)out.push({tourId:t.id,idx:i,d:n+1});})));return out;}
 function renderHome(){
   setHeader(null);
   let total=0;S.tours.forEach(t=>total+=tourWords(t));
   const areas=[...new Set(S.tours.map(t=>t.area))];
   let sorted=S.tours.slice();
-  let html=`<div class="intro">Pick a neighborhood, then either tap stops to listen, or start a walk and let GPS play each stop as you reach it. Every tour has an overview you can listen to on the way there.</div>
+  let html=`<div class="intro">Pick a neighborhood, then either tap stops to listen, or start a walk and let GPS play each stop as you reach it. Every tour has an overview you can listen to on the way there${deeperOn()?", and most stops have extra chapters if you want to go deeper":""}.</div>
   <div class="locrow"><button class="pill${S.wantNearby?" on":""}" id="nearBtn">📍 ${S.wantNearby?(S.pos?"Sorted by distance":"Finding you…"):"Show what's near me"}</button></div>`;
   for(const a of areas){
     let list=sorted.filter(t=>t.area===a);
     if(S.wantNearby&&S.pos)list.sort((x,y)=>nearestStop(x).d-nearestStop(y).d);
     html+=`<h2 class="area">${esc(a)}</h2>`;
     for(const t of list){
-      const w=tourWords(t),pc=playedCount(t),n=t.stops.length+1;const ns=nearestStop(t);
+      const w=tourWords(t),pc=playedCount(t),n=t.stops.length+1;const ns=nearestStop(t);const dm=tourDeepMin(t);
       html+=`<button class="card" data-t="${t.id}">${bulletHTML(t)}<div style="flex:1;min-width:0"><div class="t">${esc(t.title)}</div><div class="b">${esc(t.blurb)}</div>
-      <div class="m"><span>${t.stops.length} stops</span><span>~${tourMin(t)} min</span>${pc?`<span>${pc}/${n} heard</span>`:""}${ns?`<span class="near" data-near="${t.id}">${fmtDist(ns.d)} away</span>`:""}</div>
+      <div class="m"><span>${t.stops.length} stops</span><span>~${tourMin(t)} min</span>${dm?`<span>+${fmtMin(dm)} deeper</span>`:""}${pc?`<span>${pc}/${n} heard</span>`:""}${ns?`<span class="near" data-near="${t.id}">${fmtDist(ns.d)} away</span>`:""}</div>
       ${pc?`<div class="bar"><i style="width:${pc/n*100}%"></i></div>`:""}</div></button>`;
     }
   }
-  html+=`<div class="totals">${S.tours.length} tours · ${S.tours.reduce((a,t)=>a+t.stops.length,0)} stops · about ${(S.tours.reduce((a,t)=>a+tourMin(t),0)/60*S.settings.rate).toFixed(1)} hours of narration${S.audioMan&&S.settings.recorded!==false?" · recorded voice":""}</div>`;
+  const counts={};S.tours.forEach(t=>t.stops.forEach(s=>(s.deeper||[]).forEach(c=>{counts[c.lens]=(counts[c.lens]||0)+1;})));
+  if(deeperOn()&&Object.keys(counts).length)html+=`<h2 class="area">Go deeper by topic</h2><div class="chips">${LENSES.filter(l=>counts[l.id]).map(l=>`<button class="chip" data-lens="${l.id}">${esc(l.label)}<span>${counts[l.id]}</span></button>`).join("")}</div><div class="hint2">Every deeper chapter on one subject, across all the tours. Good for listening at home.</div>`;
+  const deepH=S.tours.reduce((a,t)=>a+tourDeepMin(t),0)/60*S.settings.rate;
+  html+=`<div class="totals">${S.tours.length} tours · ${S.tours.reduce((a,t)=>a+t.stops.length,0)} stops · about ${(S.tours.reduce((a,t)=>a+tourMin(t),0)/60*S.settings.rate).toFixed(1)} hours of narration${deepH?`, plus ${deepH.toFixed(1)} hours of deeper chapters`:""}${S.audioMan&&S.settings.recorded!==false?" · recorded voice":""}</div>`;
   $("view").innerHTML=html;
   $("view").querySelectorAll(".card").forEach(c=>c.onclick=()=>location.hash="#t-"+c.dataset.t);
+  $("view").querySelectorAll("[data-lens]").forEach(c=>c.onclick=()=>location.hash="#topic-"+c.dataset.lens);
   $("nearBtn").onclick=()=>{S.wantNearby=!S.wantNearby;if(S.wantNearby)startWatch();else stopWatchIfIdle();renderHome();};
 }
 function renderTour(t){
@@ -520,18 +626,45 @@ function renderTour(t){
     const k=key(t.id,i);const done=S.played[k];
     html+=`<li class="stop" data-i="${i}"><span class="numdot" style="border-color:${t.color};${done?`background:${t.color};color:${DARK_TEXT.has(t.color)?"#111":"#fff"}`:""}">${i+1}</span>
     <button class="main" data-play="${i}"><div class="st">${esc(s.title)}</div><div class="sm"><span>${trackMin(t.id,i,s.text)} min</span>${done?'<span class="chk">✓ heard</span>':""}<span class="d" data-d="${i}"></span></div></button>
-    <a class="go" href="${dirURL(s)}" target="_blank" rel="noopener">Directions</a></li>`;
+    <a class="go" href="${dirURL(s)}" target="_blank" rel="noopener">Directions</a>${deeperOn()&&s.deeper&&s.deeper.length?deepHTML(t,i):""}</li>`;
   });
-  html+=`</ol><div class="totals">${t.stops.length} stops · ~${tourMin(t)} min of narration</div>`;
+  const dm=tourDeepMin(t);
+  html+=`</ol><div class="totals">${t.stops.length} stops · ~${tourMin(t)} min of narration${dm?` · ${fmtMin(dm)} more if you go deeper`:""}</div>`;
   $("view").innerHTML=html;
   $("ovBtn").onclick=()=>{unlockAudio();playTrack(t.id,-1,true);};
   $("walkBtn").onclick=()=>{if(S.walk===t.id)stopWalk();else startWalk(t.id);};
   $("view").querySelectorAll("[data-play]").forEach(b=>b.onclick=()=>{unlockAudio();playTrack(t.id,+b.dataset.play,true);});
-  markCurrentStop();updateDistances();initMap(t);
+  markCurrent();updateDistances();initMap(t);
 }
+// All the chapters on one topic, grouped by tour; they play in order as a playlist.
+function renderTopic(id){
+  const L=LENS[id];const list=topicList(id);
+  setHeader(null,L.label,`Go deeper · ${list.length} chapter${list.length===1?"":"s"}`);
+  let min=0;list.forEach(r=>{min+=trackMin(r.tourId,r.idx,chaptersOf(r.tourId,r.idx)[r.d-1].text,r.d);});
+  const heard=list.filter(r=>S.played[key(r.tourId,r.idx,r.d)]).length;
+  let html=`<div class="tourhead"><p class="blurb">${esc(L.desc)}${heard?` You've heard ${heard} of ${list.length}.`:""}</p></div>`;
+  if(list.length)html+=`<div class="actions"><button class="btn primary" id="allBtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>${heard&&heard<list.length?"Keep going":"Play all"} · ${fmtMin(min)}</button></div>`;
+  else html+=`<div class="intro">No chapters on this topic yet.</div>`;
+  let lastT=null;
+  list.forEach(r=>{const t=S.byId[r.tourId];if(t!==lastT){if(lastT)html+="</ol>";html+=`<h2 class="area tgrp">${bulletHTML(t,true)}<span>${esc(t.title)}</span></h2><ol class="chs">`;lastT=t;}
+    html+=chRow(t,r.idx,r.d,(r.idx+1)+". "+t.stops[r.idx].title);});
+  if(lastT)html+="</ol>";
+  $("view").innerHTML=html;
+  const ab=$("allBtn");if(ab)ab.onclick=()=>{unlockAudio();const r=list.find(x=>!S.played[key(x.tourId,x.idx,x.d)])||list[0];playTrack(r.tourId,r.idx,true,r.d,list);};
+  markCurrent();
+}
+// Taps on "Go deeper" toggles and chapter rows, in any view.
+$("view").addEventListener("click",e=>{
+  const tg=e.target.closest("[data-tog]");
+  if(tg){const k=key(S.tourId,+tg.dataset.tog);S.openDeep[k]=!S.openDeep[k];tg.parentElement.classList.toggle("open",!!S.openDeep[k]);return;}
+  chapterClick(e);
+});
 function dirURL(s){const ios=/iPhone|iPad|iPod/.test(navigator.userAgent);return ios?`https://maps.apple.com/?daddr=${s.lat},${s.lng}&dirflg=w`:`https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}&travelmode=walking`;}
-function markCurrentStop(){document.querySelectorAll(".stop").forEach(li=>li.classList.toggle("current",!!S.track&&S.track.tourId===S.tourId&&S.track.idx===+li.dataset.i));}
-function refreshPlayedMarks(){if(S.view==="tour"){const y=window.scrollY;renderTour(S.byId[S.tourId]);window.scrollTo(0,y);}}
+// Highlights the playing stop (tour view) and the playing chapter (anywhere chapter rows are shown).
+function markCurrent(){const T=S.track;
+  document.querySelectorAll(".stop").forEach(li=>li.classList.toggle("current",!!T&&T.tourId===S.tourId&&T.idx===+li.dataset.i));
+  document.querySelectorAll(".ch[data-ch]").forEach(b=>{const [tid,i,n]=b.dataset.ch.split("|");b.classList.toggle("cur",!!T&&T.tourId===tid&&T.idx===+i&&(T.d||0)===+n);});}
+function refreshPlayedMarks(){if(S.view==="tour"||S.view==="topic"){const y=window.scrollY;if(S.view==="tour")renderTour(S.byId[S.tourId]);else renderTopic(S.lens);window.scrollTo(0,y);}}
 function updateDistances(){
   if(!S.pos)return;
   if(S.view==="home"){document.querySelectorAll("[data-near]").forEach(el=>{const ns=nearestStop(S.byId[el.dataset.near]);el.textContent=fmtDist(ns.d)+" away";});
@@ -540,9 +673,10 @@ function updateDistances(){
     const nh=$("nextHint");if(nh){const nx=t.stops.map((s,i)=>({s,i,d:dist(S.pos,s)})).filter(o=>!S.triggered[key(t.id,o.i)]).sort((a,b)=>a.d-b.d)[0];
       nh.innerHTML=nx?`Nearest stop you haven't reached: <b>${nx.i+1}. ${esc(nx.s.title)}</b>, ${fmtDist(nx.d)} ${bearing(S.pos,nx.s)}.`:"You've reached every stop on this tour.";}}
 }
-function setHeader(t){
-  $("backBtn").classList.toggle("hidden",!t);
-  $("hdrTitle").innerHTML=t?`<span style="display:flex;align-items:center;gap:10px">${bulletHTML(t,true)}<span style="overflow:hidden;text-overflow:ellipsis">${esc(t.title)}</span></span>`:`Walk NYC<span class="sub">Audio walking tours of Manhattan &amp; Brooklyn</span>`;
+// t: a tour (bullet + title); label/sub: a plain titled page (topic view); neither: home.
+function setHeader(t,label,sub){
+  $("backBtn").classList.toggle("hidden",!t&&!label);
+  $("hdrTitle").innerHTML=t?`<span style="display:flex;align-items:center;gap:10px">${bulletHTML(t,true)}<span style="overflow:hidden;text-overflow:ellipsis">${esc(t.title)}</span></span>`:label?`${esc(label)}<span class="sub">${esc(sub||"")}</span>`:`Walk NYC<span class="sub">Audio walking tours of Manhattan &amp; Brooklyn</span>`;
 }
 $("backBtn").onclick=()=>{location.hash="";};
 
@@ -577,9 +711,10 @@ function updateMe(){if(!S.map||!S.pos||!window.L||S.view!=="tour")return;const l
 function route(){
   const h=location.hash;S.map=null;S.meMarker=null;
   if(h.startsWith("#t-")&&S.byId[h.slice(3)]){S.view="tour";S.tourId=h.slice(3);renderTour(S.byId[S.tourId]);window.scrollTo(0,0);}
+  else if(h.startsWith("#topic-")&&LENS[h.slice(7)]){S.view="topic";S.tourId=null;S.lens=h.slice(7);renderTopic(S.lens);window.scrollTo(0,0);}
   else{S.view="home";S.tourId=null;S.sortedOnce=false;renderHome();}
 }
-function render(){if(S.view==="tour"){const y=window.scrollY;renderTour(S.byId[S.tourId]);window.scrollTo(0,y);}else renderHome();updatePlayer();}
+function render(){if(S.view==="tour"||S.view==="topic")refreshPlayedMarks();else renderHome();updatePlayer();}
 window.addEventListener("hashchange",route);
 
 /* ---------- settings ---------- */
@@ -587,7 +722,7 @@ function syncSettingsUI(){
   $("rateIn").value=S.settings.rate;$("rateVal").textContent=(+S.settings.rate).toFixed(2)+"×";
   $("radIn").value=S.settings.radius;$("radVal").textContent=S.settings.radius+" m ("+Math.round(S.settings.radius*3.28)+" ft)";
   $("sizeIn").value=S.settings.size;$("sizeVal").textContent=S.settings.size+"px";
-  $("autoNextIn").checked=!!S.settings.autoNext;
+  $("autoNextIn").checked=!!S.settings.autoNext;$("deepSel").value=S.settings.deeper||"offer";
   $("recRow").classList.toggle("hidden",!S.audioMan);$("recIn").checked=S.settings.recorded!==false;
   if(S.audioMan){const n=Object.keys(S.audioMan.tracks).length;$("recInfo").textContent=`${n} recorded tracks (${String(S.audioMan.voice||"").replace(/^\w+:/,"")}). Off = use the phone voice below. Recorded audio keeps playing with the screen locked.`;}document.documentElement.style.setProperty("--text-size",S.settings.size+"px");
 }
@@ -600,7 +735,8 @@ $("rateIn").onchange=()=>{AEL.playbackRate=S.settings.rate;if(S.playing&&S.mode!
 $("radIn").oninput=e=>{S.settings.radius=+e.target.value;save();syncSettingsUI();};
 $("sizeIn").oninput=e=>{S.settings.size=+e.target.value;save();syncSettingsUI();};
 $("autoNextIn").onchange=e=>{S.settings.autoNext=e.target.checked;save();};
-$("recIn").onchange=e=>{S.settings.recorded=e.target.checked;save();if(S.track){const t=S.track;const was=S.playing;playTrack(t.tourId,t.idx,was);}};
+$("deepSel").onchange=e=>{S.settings.deeper=e.target.value;save();};
+$("recIn").onchange=e=>{S.settings.recorded=e.target.checked;save();if(S.track){const t=S.track;const was=S.playing;playTrack(t.tourId,t.idx,was,t.d,S.list);}};
 $("testVoice").onclick=()=>{if(S.playing)pause();const u=new SpeechSynthesisUtterance("Welcome to New York. This is how the narration will sound.");u.rate=S.settings.rate;const v=currentVoice();if(v){u.voice=v;u.lang=v.lang;}synth.cancel();synth.speak(u);};
 let resetArmed=false;
 $("resetBtn").onclick=()=>{if(!resetArmed){resetArmed=true;$("resetBtn").textContent="Tap again to confirm reset";setTimeout(()=>{resetArmed=false;$("resetBtn").textContent="Reset listening progress";},4000);return;}
@@ -613,7 +749,7 @@ function noteQueue(){try{return JSON.parse(localStorage.getItem("walknyc-notes")
 function setNoteQueue(q){try{localStorage.setItem("walknyc-notes",JSON.stringify(q));}catch(e){}}
 function noteContext(){
   const tr=S.track||(S.tourId?{tourId:S.tourId,idx:null}:null);const c={app:APP_VERSION,at:new Date().toISOString()};
-  if(tr){c.tour=tr.tourId;if(tr.idx!=null){c.stop=tr.idx;c.stopTitle=trackInfo(tr.tourId,tr.idx).title;}if(S.track&&S.chunks[S.ci])c.sentence=S.chunks[S.ci].text;}
+  if(tr){c.tour=tr.tourId;if(tr.idx!=null){c.stop=tr.idx;const ti=trackInfo(tr.tourId,tr.idx,tr.d);if(ti.c){c.stopTitle=(tr.idx+1)+". "+ti.s.title;c.deeper=tr.d;c.chapterTitle=ti.c.title;}else c.stopTitle=ti.title;}if(S.track&&S.chunks[S.ci])c.sentence=S.chunks[S.ci].text;}
   if(S.pos){c.lat=S.pos.lat;c.lng=S.pos.lng;c.acc=Math.round(S.pos.acc);}
   return c;
 }
@@ -627,7 +763,7 @@ async function flushNotes(){
 }
 function openNote(){
   const c=noteContext();S.noteCtx=c;
-  const showCtx=()=>{const bits=[];if(c.tour)bits.push(S.byId[c.tour].title);if(c.stop===-1)bits.push("Overview");else if(c.stopTitle)bits.push(c.stopTitle);if(c.lat!=null)bits.push("location attached");
+  const showCtx=()=>{const bits=[];if(c.tour)bits.push(S.byId[c.tour].title);if(c.stop===-1)bits.push("Overview");else if(c.stopTitle)bits.push(c.stopTitle);if(c.chapterTitle)bits.push("Go deeper: "+c.chapterTitle);if(c.lat!=null)bits.push("location attached");
     $("noteCtx").textContent=bits.length?"Attached: "+bits.join(" · "):"No tour or location attached.";};
   showCtx();
   if(c.lat==null&&navigator.geolocation)navigator.geolocation.getCurrentPosition(p=>{c.lat=p.coords.latitude;c.lng=p.coords.longitude;c.acc=Math.round(p.coords.accuracy);showCtx();},()=>{},{enableHighAccuracy:true,timeout:8000,maximumAge:60000});
