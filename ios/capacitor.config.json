@@ -10,5 +10,6 @@
     "path": "native",
     "contentInset": "never",
     "limitsNavigationsToAppBoundDomains": false
-  }
+  },
+  "backgroundColor": "#0d0d0e"
 }
