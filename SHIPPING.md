@@ -23,11 +23,15 @@ Then check `https://walk-nyc.pages.dev/` loads, `/audio/manifest.json` returns J
 ## Recorded audio
 
 1. Render on the A40 (see `voices/README.md`): `python render_kokoro.py --all --voice af_heart`. Alex's chosen voice is **af_heart**.
-2. Upload `voices/out/audio/` to R2 under the `audio/` prefix. On the A40, with the token in the environment:
+2. Publish from the A40:
    ```
-   cd ~/lab/walk-nyc-voices && bash upload_r2.sh
+   cd ~/lab/walk-nyc-voices && bash publish_audio.sh
    ```
-   It uploads each mp3, then `manifest.json` last, so the app never sees a manifest pointing at missing files.
+   This checks that every file in `manifest.json` exists, then force-pushes `out/audio/` as a single commit to the `audio` branch (over the `github-walknyc` deploy key). Pushing to that branch runs the **Upload narration to R2** Action, which uploads each mp3 to the R2 bucket `walk-nyc-audio` under `audio/`, then `manifest.json` last, so the app never sees a manifest pointing at missing files. The Action then checks the live manifest and one mp3. Watch it at https://github.com/apolitakis/walk-nyc/actions.
+   - The Cloudflare token lives only in the repo secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, scoped to R2 object writes on `walk-nyc-audio`. The A40 doesn't need it.
+   - The Action's definition is in `voices/publish_audio.sh`, which writes it into the `audio` branch. Edit it there, not on the branch.
+   - To re-run an upload without re-pushing: Actions -> Upload narration to R2 -> Run workflow, on branch `audio`.
+   - Fallback, with the token in the environment: `bash upload_r2.sh` uploads directly.
 3. No redeploy needed: the Pages Function reads R2 directly. The app picks up the new manifest on its next launch.
 
 ## Reading feedback notes
