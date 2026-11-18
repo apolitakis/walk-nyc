@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.2 — 2026-11-17
+- iOS app support: when running inside the Capacitor wrapper, walking mode registers the tour's stops as native geofences so stops trigger with the phone locked, with arrivals from GPS and geofences sharing one path. Shows "You can lock your phone" in the walking banner inside the app only. No change in a normal browser.
+
 ## 0.3.1 — 2026-11-17
 - First deploy to Cloudflare Pages (walk-nyc.pages.dev): feedback notes stored in the walk-nyc-feedback KV namespace, R2 bucket walk-nyc-audio ready for recorded narration.
 

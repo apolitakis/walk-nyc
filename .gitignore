@@ -6,3 +6,4 @@ node_modules/
 .wrangler/
 hosting/cloudflare/.dev.vars
 .DS_Store
+ios/www/
