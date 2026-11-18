@@ -1,0 +1,14 @@
+{
+  "appId": "com.apolitakis.walknyc",
+  "appName": "Walk NYC",
+  "webDir": "www",
+  "server": {
+    "url": "https://walk-nyc.pages.dev",
+    "cleartext": false
+  },
+  "ios": {
+    "path": "native",
+    "contentInset": "never",
+    "limitsNavigationsToAppBoundDomains": false
+  }
+}

@@ -270,31 +270,61 @@ function startWatch(){
 }
 function stopWatchIfIdle(force){if(S.watchId!=null&&(force||!S.walk&&!S.wantNearby)){navigator.geolocation.clearWatch(S.watchId);S.watchId=null;}}
 function onPos(p){
-  S.pos={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy};
+  S.pos={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy,at:Date.now()};
   updateDistances();checkTriggers();updateMe();
 }
 
 /* ---------- walking mode ---------- */
+/* ---------- native (iOS app) ---------- */
+// In the Capacitor iOS wrapper, stops are also registered as iOS geofences so they fire
+// with the phone locked. In a normal browser NATIVE is false and nothing below runs.
+const NATIVE=!!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform());
+const Geofence=NATIVE?(window.Capacitor.Plugins&&window.Capacitor.Plugins.Geofence)||(window.Capacitor.registerPlugin&&window.Capacitor.registerPlugin("Geofence")):null;
+async function nativeStartWalk(t){
+  if(!Geofence)return;
+  try{
+    const p=await Geofence.requestPermission();
+    if(p&&p.status!=="always")toast("For stops to start with your phone locked, allow location \"Always\" for Walk NYC in Settings.");
+    await Geofence.setStops({stops:t.stops.map((s,i)=>({id:key(t.id,i),lat:s.lat,lng:s.lng,radius:Math.max(100,S.settings.radius),title:(i+1)+". "+s.title}))});
+  }catch(e){}
+}
+function nativeStopWalk(){if(Geofence)Geofence.clear().catch(()=>{});}
+function onGeofenceEnter(ev){
+  const m=/^(.*):(-?\d+)$/.exec(ev&&ev.id||"");if(!m)return;
+  if(!S.tours.length){S.pendingEnter=ev;return;}  // cold launch from a notification tap: tours.json not loaded yet
+  const tourId=m[1],i=+m[2],t=S.byId[tourId];if(!t||!t.stops[i])return;
+  if(ev.tapped){if(!(S.track&&S.track.tourId===tourId&&S.track.idx===i)){S.triggered[key(tourId,i)]=1;S.queue=null;playTrack(tourId,i,true);}return;}
+  if(S.walk!==tourId||S.triggered[key(tourId,i)])return;
+  // Regions are >=100 m and can fire early; if a fresh, precise GPS fix says we're not there yet, let checkTriggers() decide.
+  if(S.pos&&S.pos.at&&Date.now()-S.pos.at<15000&&S.pos.acc<=50)return;
+  arrive(t,i);
+}
+if(Geofence)Geofence.addListener("enter",onGeofenceEnter);
+
 function startWalk(tourId){
   S.walk=tourId;S.triggered={};S.queue=null;unlockAudio();startWatch();lockScreen();
+  if(NATIVE)nativeStartWalk(S.byId[tourId]);
   if(S.audioMan&&S.settings.recorded!==false){unlockMedia();chime();toast("Walking mode on. Each stop starts when you arrive.");}
   else speakNow("Walking tour started. Each stop will begin when you arrive.");
   render();
 }
-function stopWalk(){S.walk=null;S.queue=null;releaseLock();stopWatchIfIdle();render();}
+function stopWalk(){S.walk=null;S.queue=null;releaseLock();stopWatchIfIdle();if(NATIVE)nativeStopWalk();render();}
 function checkTriggers(){
   if(!S.walk||!S.pos||S.pos.acc>120)return;
   const t=S.byId[S.walk];const thr=S.settings.radius+Math.min(S.pos.acc/2,25);
   let best=null;
   t.stops.forEach((s,i)=>{const k=key(t.id,i);if(S.triggered[k])return;const d=dist(S.pos,s);if(d<=thr&&(!best||d<best.d))best={i,d};});
   if(!best)return;
-  const k=key(t.id,best.i);S.triggered[k]=1;
-  if(S.track&&S.track.tourId===t.id&&S.track.idx===best.i)return;
-  const name=t.stops[best.i].title;
+  arrive(t,best.i);
+}
+function arrive(t,i){
+  const k=key(t.id,i);S.triggered[k]=1;
+  if(S.track&&S.track.tourId===t.id&&S.track.idx===i)return;
+  const name=t.stops[i].title;
   if(S.playing){
-    S.queue={tourId:t.id,idx:best.i};
+    S.queue={tourId:t.id,idx:i};
     toast("You're at "+esc(name)+". It plays when this track ends.","Play now",()=>{const q=S.queue;S.queue=null;playTrack(q.tourId,q.idx,true);});
-  }else{chime();setTimeout(()=>playTrack(t.id,best.i,true),900);toast("Arrived: "+esc(name));}
+  }else{chime();setTimeout(()=>playTrack(t.id,i,true),900);toast("Arrived: "+esc(name));}
 }
 async function lockScreen(){try{if("wakeLock" in navigator){S.wake=await navigator.wakeLock.request("screen");}}catch(e){}}
 function releaseLock(){try{S.wake&&S.wake.release();}catch(e){}S.wake=null;}
@@ -484,7 +514,7 @@ function renderTour(t){
     <button class="btn primary" id="ovBtn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Overview · ${trackMin(t.id,-1,t.overview)} min</button>
     <button class="btn ${walking?"walking":""}" id="walkBtn">${walking?"■ Stop walking mode":"🚶 Start walk (GPS)"}</button>
   </div>`;
-  if(walking)html+=`<div class="walkinfo" id="walkInfo">Walking mode is on. Keep this page open with the screen on; each stop plays when you're within about ${S.settings.radius} m (${Math.round(S.settings.radius*3.28)} ft). <span id="nextHint"></span></div>`;
+  if(walking)html+=`<div class="walkinfo" id="walkInfo">Walking mode is on. ${NATIVE?"You can lock your phone":"Keep this page open with the screen on"}; each stop plays when you're within about ${S.settings.radius} m (${Math.round(S.settings.radius*3.28)} ft). <span id="nextHint"></span></div>`;
   html+=`<div id="map"></div><ol class="stops">`;
   t.stops.forEach((s,i)=>{
     const k=key(t.id,i);const done=S.played[k];
@@ -620,6 +650,7 @@ if(!synth)setTimeout(()=>toast("This browser can't do text-to-speech. Try Safari
 fetch("audio/manifest.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(m=>{if(m&&m.tracks&&Object.keys(m.tracks).length){S.audioMan=m;syncSettingsUI();if(S.tours.length)render();}}).catch(()=>{});
 fetch("tours.json").then(r=>r.json()).then(data=>{
   S.tours=data;data.forEach((t,i)=>{t.num=i+1;t.color=COLORS[i%COLORS.length];S.byId[t.id]=t;});route();
+  if(S.pendingEnter){const ev=S.pendingEnter;S.pendingEnter=null;onGeofenceEnter(ev);}
 }).catch(()=>{$("view").innerHTML='<div class="intro">Could not load the tours. Check your connection and reload.</div>';});
 setTimeout(flushNotes,3000);
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
