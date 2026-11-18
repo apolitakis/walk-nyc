@@ -608,7 +608,7 @@ $("resetBtn").onclick=()=>{if(!resetArmed){resetArmed=true;$("resetBtn").textCon
 
 /* ---------- feedback notes ---------- */
 // Notes go to /api/feedback (a Cloudflare Pages Function). Anything that can't be sent is kept on the phone and retried.
-const APP_VERSION="0.3.2";
+const APP_VERSION="0.3.3";
 function noteQueue(){try{return JSON.parse(localStorage.getItem("walknyc-notes")||"[]");}catch(e){return [];}}
 function setNoteQueue(q){try{localStorage.setItem("walknyc-notes",JSON.stringify(q));}catch(e){}}
 function noteContext(){
