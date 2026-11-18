@@ -23,11 +23,13 @@ Then check `https://walk-nyc.pages.dev/` loads, `/audio/manifest.json` returns J
 ## Recorded audio
 
 1. Render on the A40 (see `voices/README.md`): `python render_kokoro.py --all --voice af_heart`. Alex's chosen voice is **af_heart**.
-2. Upload `voices/out/audio/` to R2 under the `audio/` prefix. On the A40, with the token in the environment:
+2. Publish to GitHub; a GitHub Action uploads to R2. On the A40 (needs only `gh` logged in, no Cloudflare credentials):
    ```
-   cd ~/lab/walk-nyc-voices && bash upload_r2.sh
+   cd ~/lab/walk-nyc-voices && bash publish_audio.sh   # copy voices/publish_audio.sh there first if missing
    ```
-   It uploads each mp3, then `manifest.json` last, so the app never sees a manifest pointing at missing files.
+   It packs `out/audio/` into `audio.tar.gz` and attaches it to a new release tagged `audio-YYYYMMDD-HHMM`. Publishing the release runs `.github/workflows/upload-audio.yml`, which uploads each mp3 to R2 under `audio/`, then `manifest.json` last (so the app never sees a manifest pointing at missing files), then checks the live site serves it. To re-run for an existing release: Actions → "Upload audio to R2" → Run workflow, with the tag.
+   The workflow uses the repository secret `CLOUDFLARE_R2_TOKEN` (a token with only Workers R2 Storage: Edit, or R2 Object Read & Write on `walk-nyc-audio`) and the repository variable `CLOUDFLARE_ACCOUNT_ID`.
+   Fallback with a token in the environment: `bash upload_r2.sh` does the same upload directly.
 3. No redeploy needed: the Pages Function reads R2 directly. The app picks up the new manifest on its next launch.
 
 ## Reading feedback notes
