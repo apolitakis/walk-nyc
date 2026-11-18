@@ -39,14 +39,14 @@ When a region fires, iOS wakes the app in the background for about 10 seconds; t
 
 ### 3. Background audio
 
-- Xcode → Signing & Capabilities → Background Modes: **Audio, AirPlay, and Picture in Picture** and **Location updates**.
+- Xcode → Signing & Capabilities → Background Modes: **Audio, AirPlay, and Picture in Picture**. (Originally also **Location updates**; removed for TestFlight on 2026-11-18 because `CLMonitor` doesn't need it. See NOTES.md.)
 - At launch, set `AVAudioSession` category `.playback` (mode `.spokenAudio`), so `<audio>` in the WKWebView keeps playing when locked.
 - The web app already sets `navigator.mediaSession` metadata and handlers; confirm the lock screen shows them inside WKWebView. If not, mirror them via `MPNowPlayingInfoCenter` and `MPRemoteCommandCenter` in a tiny plugin.
 
 ### 4. Info.plist
 
 - `NSLocationWhenInUseUsageDescription`, `NSLocationAlwaysAndWhenInUseUsageDescription`: "Walk NYC starts each stop's narration when you arrive, even with your phone in your pocket."
-- `UIBackgroundModes`: `audio`, `location`.
+- `UIBackgroundModes`: `audio` (`location` removed 2026-11-18, see NOTES.md).
 - If the service worker should run inside WKWebView, add `WKAppBoundDomains` with `walk-nyc.pages.dev`. Optional: the app works without the service worker.
 
 ## Install on Alex's iPhone

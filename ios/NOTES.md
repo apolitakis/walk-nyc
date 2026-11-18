@@ -2,6 +2,17 @@
 
 What was built from `BUILD-iOS.md`, what works, and what's still untested. Newest first.
 
+## 2026-11-18: TestFlight prep (not yet built on the Mac)
+
+Made in the cloud, so none of this has been through Xcode yet. The first `scripts/testflight.sh` run is the check.
+- App icon from `icon.svg` (square, no alpha) and a black launch screen with the walker logo; WebView background `#0d0d0e` (`capacitor.config.json`, needs `npm run sync`).
+- iPhone only (`TARGETED_DEVICE_FAMILY = 1`), `MARKETING_VERSION` 1.0.0, `VERSIONING_SYSTEM = apple-generic`.
+- Info.plist: removed the `location` background mode (CLMonitor doesn't need it; App Review flags it when an app doesn't track continuously). If arrivals don't fire with the phone locked on the outdoor test, putting it back is the first thing to try. Added `ITSAppUsesNonExemptEncryption` = NO and the Travel category; clearer location strings.
+- `App/PrivacyInfo.xcprivacy` (added to the target's Resources).
+- `scripts/testflight.sh` + `ExportOptions.plist`: archive and upload with `TEAM_ID=... ./scripts/testflight.sh`.
+- `hosting/cloudflare/public/privacy.html` for the TestFlight privacy policy URL (live after the next ship).
+- Steps for Alex: `TESTFLIGHT.md`.
+
 ## 2026-11-17: first build (Capacitor wrapper)
 
 Built on Alex's Mac: Xcode 27.2, iOS 27.2 Simulator runtime, Node 26.13.1 LTS (installed to `~/.local/node`, symlinked into `~/.local/bin`; there was no Node or Homebrew on the Mac before).
