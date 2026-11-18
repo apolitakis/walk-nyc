@@ -1,0 +1,115 @@
+=== TOUR
+id: village
+title: Greenwich Village
+area: Manhattan
+blurb: Washington Square, the Triangle fire, the folk revival, Stonewall, Jane Jacobs, and the original Bell Labs.
+=== OVERVIEW
+Greenwich Village has been, for more than a century, the place where America's rebels, bohemians, and dissenters came to live. Before that, it was literally a village.
+
+In the eighteenth century, Greenwich was a separate rural hamlet, a couple of miles north of the city, with country estates and farms. Its growth was driven by fear. In the early 1800s, yellow fever and cholera epidemics repeatedly swept through crowded lower Manhattan, and residents fled north to the healthier air of Greenwich. During the epidemic of 1822, banks and businesses relocated here temporarily; Bank Street is said to take its name from banks that set up offices there. Many people who came during the epidemics stayed.
+
+Because the Village developed before the 1811 street grid, its streets follow old property lines, country lanes, and a buried stream called Minetta Brook. That's why the West Village is a maze of angled streets, and why, famously, West 4th Street crosses West 10th, 11th, and 12th Streets, something that should be geometrically impossible on a grid. The maze kept out through traffic and kept rents low, and that, in turn, attracted artists.
+
+By the early twentieth century, the Village was America's bohemia. Writers, painters, radicals, feminists, and free-love advocates crowded its cheap rooming houses and cafés. Eugene O'Neill's early plays were staged here. The radical magazine The Masses was published here. In the 1950s, the Beat poets gathered in its coffeehouses, and in the 1960s, the folk revival was born on MacDougal Street, launching Bob Dylan and many others. The Village was also home to one of the earliest and most visible gay communities in America, and in 1969, it became the birthplace of the modern gay rights movement at the Stonewall Inn.
+
+The Village is also where the modern historic preservation movement and modern urbanism found one of their greatest voices: Jane Jacobs, who lived on Hudson Street and who defeated Robert Moses's plans to remake the neighborhood.
+
+Today, the Village is one of the most expensive places to live in the country, and the bohemians largely can't afford it. But its street life, its historic buildings, and its sense of being a small town inside a big city have been carefully preserved, in large part thanks to the fights you'll hear about on this walk.
+=== STOP Washington Square Park & the Arch @ 40.7310,-73.9973
+You're in Washington Square Park, the heart of Greenwich Village.
+
+This land has a grim past. From 1797 to 1825, it served as a potter's field, a burial ground for the poor, the unknown, and victims of yellow fever. Archaeologists estimate that thousands of people may still be buried beneath the park, and bones are occasionally unearthed during construction work. Public executions were also held in the area, and a large old English elm in the northwest corner is called the Hangman's Elm, though historians doubt anyone was actually hanged from it.
+
+In 1826, the city converted the field into a parade ground and later a public park, and wealthy families built elegant homes around it. Look at the north side of the park, along Washington Square North. The row of red brick Greek Revival townhouses, built in the 1830s, is known as The Row. This was old money New York. The novelist Henry James was born nearby, and his 1880 novel Washington Square captured the world of these houses.
+
+Now look at the marble arch at the foot of Fifth Avenue. In 1889, for the centennial of George Washington's inauguration, a temporary wooden arch was built here. It was so popular that the city commissioned a permanent version, designed by Stanford White, of the firm McKim, Mead and White, and completed in 1892. It's modeled on the Arc de Triomphe in Paris. Two statues of Washington, as general and as president, were added to the north face in the following decades. In 1917, a group of artists, including Marcel Duchamp, climbed to the top of the arch through an internal stairway and declared the Free and Independent Republic of Washington Square, a classic Village prank.
+
+The park was also the site of a major battle over the future of cities. For years, Fifth Avenue traffic ran right through the park, under the arch. In the 1950s, Robert Moses proposed extending Fifth Avenue as a sunken highway through the center of the park. Local mothers, led by Shirley Hayes and joined by Jane Jacobs, organized a campaign against it. Not only did they win, but by the early 1960s, traffic was banned from the park entirely. It was one of the first major defeats of Moses's highway plans.
+
+The park has long been a stage for music and protest. In 1961, when the city tried to ban folk singing in the park, hundreds of musicians and fans gathered in defiance, a confrontation sometimes called the Beatnik Riot. The city backed down. Today, the fountain area is still filled with musicians, performers, chess players, and students from New York University, which surrounds the park and owns many of the buildings around it.
+=== STOP The Triangle Shirtwaist Factory @ 40.7302,-73.9956
+At the corner of Washington Place and Greene Street, look at the ten-story building, now owned by New York University and known as the Brown Building. On the eighth, ninth, and tenth floors of this building was the Triangle Waist Company, a factory that made women's blouses, called shirtwaists.
+
+On the afternoon of Saturday, March twenty-fifth, 1911, near closing time, a fire broke out on the eighth floor, probably from a discarded cigarette or match in a bin of fabric scraps. The fire spread with terrifying speed through piles of cotton and tissue paper. Workers on the eighth floor escaped. Workers on the tenth floor, including the owners, escaped to the roof. But on the ninth floor, the workers were trapped. One exit door was locked, reportedly to prevent theft and unauthorized breaks. The single flimsy fire escape collapsed under the weight of people trying to flee. The fire department's ladders only reached the sixth or seventh floor.
+
+Crowds on the street watched as workers, many of them young Jewish and Italian immigrant women, some in their teens, jumped from the windows to escape the flames. In less than half an hour, one hundred forty six people died.
+
+The owners, Max Blanck and Isaac Harris, were tried for manslaughter and acquitted. But the fire galvanized the city. Huge crowds marched in a funeral procession through the streets. The state created a Factory Investigating Commission, led by state legislators Robert Wagner and Al Smith, which pushed through dozens of new laws on fire safety, sprinklers, working hours, and factory conditions.
+
+One eyewitness was a young social reformer named Frances Perkins, who happened to be having tea nearby and ran to the scene. She later said the New Deal began on that day. Perkins went on to become Franklin Roosevelt's Secretary of Labor, the first woman to serve in a presidential cabinet, and was a driving force behind Social Security, the minimum wage, and limits on working hours.
+
+Look at the building's corner. You may see a series of small plaques, and on the anniversary each year, people gather here and chalk the names of the victims on the sidewalk. A permanent memorial was installed on the building in 2023, with ribbons of steel bearing the victims' names.
+=== STOP MacDougal Street & the Folk Revival @ 40.7302,-74.0003
+You're on MacDougal Street, just south of Washington Square, the center of Village bohemia for over a century.
+
+In 1916, a group of writers and artists moved their small theater company from Cape Cod to MacDougal Street and became the Provincetown Players. Their most important discovery was a young playwright named Eugene O'Neill, whose early plays were first performed here. The Provincetown Playhouse building still stands on MacDougal, south of the park, though it's been rebuilt by NYU.
+
+On the corner of MacDougal and Minetta Lane, look for Minetta Tavern, which opened in 1937 and was a hangout for writers like Ernest Hemingway, E. E. Cummings, and Ezra Pound, at least according to legend. Nearby, Caffe Reggio, open since 1927, claims to have introduced the cappuccino to America, and its antique espresso machine is on display. Minetta Lane follows the curve of the buried Minetta Brook, which still flows underground.
+
+In the 1950s and 60s, the coffeehouses of MacDougal and Bleecker Streets became the stage for the folk revival. Places like the Gaslight Cafe, the Café Wha?, and, a few blocks away on West Fourth Street, Gerde's Folk City, hosted open mic nights where young musicians performed for tips, often passing a basket. A nineteen-year-old from Minnesota named Bob Dylan arrived in the winter of 1961 and began playing at Café Wha?. Within a year, after a glowing review in the New York Times of a show at Gerde's, he had a record contract. Others who played these clubs included Joan Baez, Dave Van Ronk, Phil Ochs, Peter, Paul and Mary, and Simon and Garfunkel. The Café Wha? also gave an early stage to a guitarist then calling himself Jimmy James, who soon became known as Jimi Hendrix.
+
+The Beat writers were here too, in the 1950s. Jack Kerouac, Allen Ginsberg, and Gregory Corso read poetry at coffeehouses and drank at bars like the San Remo, which stood at the corner of MacDougal and Bleecker.
+
+Comedy has its own history on these blocks. Comedians like Woody Allen, Bill Cosby, and Richard Pryor performed in Village clubs in the 1960s, and the Comedy Cellar, on MacDougal, opened in 1982 and is still among the most famous comedy clubs in the country. Big name comedians often drop in unannounced late at night.
+=== STOP Jefferson Market Library & Patchin Place @ 40.7344,-73.9988
+At the corner of Sixth Avenue and West 10th Street, look up at the fairy tale building with a tall clock tower, pointed arches, and colorful bands of brick and stone. This is the Jefferson Market Library, a branch of the New York Public Library. But it wasn't built as a library.
+
+Completed in 1877, it was a courthouse, the Third Judicial District Courthouse, designed by Frederick Clarke Withers and Calvert Vaux, who also co-designed Central Park. Its style is Victorian Gothic, inspired by the writings of the English critic John Ruskin, who championed colorful, richly decorated medieval architecture. In an 1880s poll of architects, it was voted one of the most beautiful buildings in America. The tower housed a fire lookout and bell. The court handled the petty crimes of the neighborhood: drunkenness, prostitution, and street disputes.
+
+After the courts moved out in the 1940s, the building sat empty and was slated for demolition. In the late 1950s and early 60s, neighborhood residents, including the poet E. E. Cummings, campaigned to save it, and it was converted into a library, opening in 1967. It was one of the early victories of the preservation movement in New York.
+
+Next door, where the lovely Jefferson Market Garden is now, stood the Women's House of Detention, a massive Art Deco jail that operated from 1932 to 1974. Inmates would shout down to friends and family on the sidewalk, and passersby would shout back. Among the women held there were the political activist Angela Davis and the writer Dorothy Day. It was demolished in 1974, and the community turned the site into a garden.
+
+Across Sixth Avenue, on West 10th Street, look for a small iron gate leading to a little dead-end street of brick houses. That's Patchin Place, built in the 1840s. Its tiny houses became home to an astonishing number of writers. E. E. Cummings lived at number four for about forty years. The novelist Djuna Barnes lived at number five for decades. The journalist John Reed, who wrote Ten Days That Shook the World about the Russian Revolution, also lived here. Around the corner is a similar alley called Milligan Place.
+
+Notice also the old gas lamp at the end of Patchin Place, one of the last gas street lamps in the city, now converted to electricity.
+=== STOP The Stonewall Inn & Christopher Park @ 40.7338,-74.0021
+You're on Christopher Street, at Christopher Park, a small triangle of green. Across the street is the Stonewall Inn.
+
+In the 1960s, gay life in New York was largely hidden and heavily policed. It was illegal for bars to serve alcohol to people believed to be gay, and police regularly raided gay bars, arresting patrons, especially those who wore clothing that didn't match their perceived gender. Because legitimate businesses avoided serving gay customers, many gay bars were run by the Mafia, which paid off the police. The Stonewall Inn was one of them: a dingy, unlicensed bar with watered-down drinks, but one of the few places where gay men, lesbians, drag queens, and transgender people, many of them young and poor, could dance together.
+
+In the early morning hours of June twenty-eighth, 1969, police raided the Stonewall. This time, the patrons didn't scatter. A crowd gathered outside and began to resist, throwing coins, bottles, and bricks. The police barricaded themselves inside the bar. The confrontations continued for several nights, with crowds of hundreds and then thousands. Among those involved, according to many accounts, were activists including Marsha P. Johnson and Sylvia Rivera, who became prominent figures in the movement that followed, though the details of who did what on which night are still debated.
+
+The uprising didn't begin the gay rights movement, which had existed in quieter forms for years, but it transformed it into a more militant, visible, mass movement. Within months, new organizations formed. On the first anniversary, in June 1970, activists organized the Christopher Street Liberation Day march, from here to Central Park. That march is considered the first gay pride parade, and pride marches held every June around the world commemorate Stonewall.
+
+In 2016, President Barack Obama designated the Stonewall National Monument, the first national monument dedicated to LGBTQ history. It includes Christopher Park and the surrounding streets.
+
+In the park, look for the white statues by the sculptor George Segal, called Gay Liberation: two standing men and two seated women, cast in bronze and painted white. They were commissioned in 1979 and installed here in 1992 after years of controversy.
+
+Christopher Street itself is one of the Village's oldest streets, named for Charles Christopher Amos, an heir to an eighteenth-century estate. Walk west along it toward the Hudson, and you'll see the shops and bars that made it the main street of gay New York for decades.
+=== STOP Bedford Street: Chumley's & the Narrowest House @ 40.7314,-74.0055
+You're now in the quiet, winding heart of the West Village, around Bedford and Commerce Streets.
+
+At 86 Bedford Street, look for a door with no sign. This is Chumley's, a former speakeasy. Opened by Leland Stanford Chumley in 1922, during Prohibition, it had hidden entrances, trapdoors, and escape routes so patrons could vanish if the police arrived. The bar became a literary hangout: writers including John Steinbeck, William Faulkner, Willa Cather, and John Dos Passos are said to have drunk here, and the walls were lined with book jackets of authors who'd been regulars.
+
+Chumley's is also connected to a well-known piece of slang. To eighty-six something means to get rid of it, or to throw someone out. One popular story claims it comes from this address: when the police were coming, the bartender would shout eighty-six it, telling customers to leave through the Bedford Street door. Etymologists are skeptical, and there are many competing explanations, but it's a good story.
+
+Down the street, at 75 and a half Bedford Street, is a building you might walk right past: a red brick house only about nine and a half feet wide, among the narrowest houses in New York. It was built in 1873 in what had been a carriage alleyway between two houses. The poet Edna St. Vincent Millay, who won the Pulitzer Prize in 1923, lived here in the 1920s. The actor John Barrymore and, according to some accounts, the cartoonist William Steig and the anthropologist Margaret Mead also lived here at various times.
+
+Around the corner, at 38 Commerce Street, the Cherry Lane Theatre, founded in 1924 in a former brewery and box factory, is among the oldest continuously operating Off-Broadway theaters in New York. It has premiered works by playwrights including Samuel Beckett, Edward Albee, and Sam Shepard.
+
+Look around at the old houses, the angled streets, and the trees. This part of the Village feels like it was built for walking, and it was. The street pattern predates the city grid, and it's the reason this neighborhood has stayed so intimate.
+=== STOP Bell Labs at Westbeth @ 40.7362,-74.0091
+Walk toward the Hudson, to the block bounded by West, Bethune, Washington, and Bank Streets, and you'll find a massive complex of connected industrial buildings. Today it's called Westbeth, the largest artists' housing complex in the world. But for most of the twentieth century, this was the headquarters of the most important industrial research laboratory in history: Bell Telephone Laboratories.
+
+The buildings were originally built for Western Electric, the manufacturing arm of AT&T. Beginning in 1925, when Bell Labs was formally established as AT&T and Western Electric's research division, this complex served as its headquarters. Engineers and scientists here worked on just about everything related to communications, and a remarkable list of breakthroughs came out of this site.
+
+In 1927, AT&T engineers demonstrated long-distance television transmission, sending live images of Herbert Hoover, then Commerce Secretary, from Washington to an audience in New York. Bell Labs and Western Electric developed sound systems for motion pictures, and the technology helped launch the talkies, including the 1927 film The Jazz Singer. Engineers here developed high-fidelity sound recording and improved vacuum tubes. In 1937, a Bell Labs mathematician, George Stibitz, built an early binary adding circuit on his kitchen table, a precursor to digital computing; his later relay computers were built in this era of Bell Labs. And during World War Two, the labs worked on radar and other military technology.
+
+Look closely at the building on the West Street side. An elevated freight railway, what is now the High Line, used to run right through the building. Trains passed through a tunnel in the building's structure.
+
+After World War Two, Bell Labs moved most of its operations to a campus in Murray Hill, New Jersey, where scientists would invent the transistor in 1947, a device that made modern electronics possible. Later came the laser, the solar cell, the UNIX operating system, and the C programming language, along with work that earned several Nobel Prizes. If you work in tech, this is your ancestral home.
+
+In 1970, the buildings were converted into Westbeth, subsidized housing and studios for artists, with support from the J. M. Kaplan Fund and the National Endowment for the Arts. The architect Richard Meier, then early in his career, designed the conversion. Generations of painters, dancers, musicians, and writers have lived here. The choreographer Merce Cunningham's dance company had its studio on the top floor for decades.
+
+It's a very Village kind of story: a building where engineers once invented the future of communication, now filled with people imagining the future of art.
+=== STOP Jane Jacobs's Hudson Street & the White Horse Tavern @ 40.7360,-74.0059
+Walk east to Hudson Street, near West 11th Street. At 555 Hudson Street, look for a modest three-story building. In the 1950s and 60s, this was the home of Jane Jacobs, the writer and activist whose 1961 book, The Death and Life of Great American Cities, changed how the world thinks about cities.
+
+Jacobs wasn't an architect or a planner. She was a journalist with an extraordinary eye. Sitting at her window and walking her neighborhood, she observed how city streets actually worked. She described what she called the sidewalk ballet of Hudson Street: shopkeepers opening their stores, children walking to school, workers on lunch break, bar patrons late at night. She argued that busy streets with mixed uses, short blocks, old buildings, and density created what she called eyes on the street, a natural, informal safety and vitality. This directly contradicted the planning orthodoxy of the time, which favored tearing down old neighborhoods, separating uses, and building towers in parks surrounded by highways.
+
+Jacobs also put her ideas into action. She helped lead the fights against Robert Moses's projects: the road through Washington Square Park, the designation of the West Village for urban renewal, and the Lower Manhattan Expressway through SoHo. She won all three. She later moved to Toronto, where she lived until her death in 2006. Her ideas are now the foundation of modern urbanism, and if you've ever heard a planner talk about walkability or mixed-use neighborhoods, you're hearing Jane Jacobs.
+
+A few steps away, at the corner of Hudson and West 11th Street, is the White Horse Tavern, which dates to 1880. In the 1950s, it became a haunt of writers. The Welsh poet Dylan Thomas was a regular, and according to legend, in November 1953, after drinking at the White Horse, he returned to the Chelsea Hotel and fell ill. He died a few days later. The extent to which drinking at the White Horse was responsible is debated, but the bar has embraced the legend. Jack Kerouac, James Baldwin, Norman Mailer, and Bob Dylan were also among its patrons.
+
+Stand here for a moment and watch the street. People walking dogs, neighbors chatting at the corner, delivery workers, people sitting at sidewalk tables. That's the sidewalk ballet Jane Jacobs described, still going on more than sixty years later, on the same street, in the neighborhood she fought to save.

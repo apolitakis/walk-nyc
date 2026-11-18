@@ -1,0 +1,8 @@
+voices/out/
+voices/samples/
+voices/.venv/
+__pycache__/
+node_modules/
+.wrangler/
+hosting/cloudflare/.dev.vars
+.DS_Store

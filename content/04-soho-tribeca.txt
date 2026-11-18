@@ -1,0 +1,101 @@
+=== TOUR
+id: soho-tribeca
+title: Hudson Square, Tribeca & SoHo
+area: Manhattan
+blurb: Freight terminals, telecom fortresses, the butter-and-egg district, cast-iron palaces, and the first passenger elevator.
+=== OVERVIEW
+This walk covers three neighborhoods that share one big story: how industrial Manhattan became residential Manhattan.
+
+For most of the nineteenth and twentieth centuries, the area west of Broadway and south of Houston Street was a working landscape. Along the Hudson River were piers, freight rail yards, and warehouses. Tribeca was the center of the city's wholesale food trade, with butter, eggs, cheese, and produce moving through enormous markets. SoHo was a district of textile and dry goods warehouses and small factories, housed in some of the most beautiful commercial buildings ever built in America, with facades made of cast iron. Hudson Square, just to the north and west, was the city's printing district, filled with presses that produced everything from magazines to phone books.
+
+After World War Two, that economy faded. Container shipping moved the port to New Jersey. Manufacturing left the city. Trucks replaced freight trains. Buildings emptied out. City planners in the 1950s and 60s viewed much of SoHo as a slum of decaying industrial buildings, and Robert Moses planned to run an elevated expressway right through it, along Broome Street, connecting the Holland Tunnel with the Manhattan and Williamsburg Bridges.
+
+Artists saved it. They had discovered that these empty factory floors, with high ceilings, big windows, and cheap rents, made ideal studios. They moved in, often illegally, since the buildings weren't zoned for residential use. Together with preservationists and activists like Jane Jacobs, they helped defeat the Lower Manhattan Expressway in the 1960s. In 1971, the city legalized artists living in lofts, and in 1973, SoHo's cast iron buildings were protected as a historic district. Galleries followed the artists. Then boutiques followed the galleries. Then the bankers, celebrities, and luxury brands followed the boutiques. The artists who saved SoHo were mostly priced out of it, a cycle so familiar that urbanists sometimes call it the SoHo effect.
+
+Tribeca went through a similar transformation a little later, and the name itself, short for Triangle Below Canal Street, was coined in the 1970s. Hudson Square is in the middle of its own reinvention, as media and tech companies, including Google and Disney, have built major offices in its old industrial buildings.
+
+As you walk, look for things that reveal the old industrial life: loading docks raised to the height of a truck bed, metal canopies over sidewalks where goods were unloaded, old painted signs on brick walls, and the glass-studded vault lights set into the sidewalks, which let daylight into basements below.
+=== STOP St. John's Terminal & Hudson Square @ 40.7282,-74.0096
+You're near the corner of West Houston Street and West Street, beside the long, massive building that stretches south along the river. This is St. John's Terminal, and if you work at Google New York, you may know it well from the inside.
+
+The name goes back to St. John's Park, which once existed a few blocks south of here. In the early 1800s, Trinity Church built a grand chapel, St. John's Chapel, and laid out a private, fenced square around it, modeled on London's elegant residential squares. It became one of the most fashionable addresses in the city. But in 1867, Trinity sold the park to Commodore Cornelius Vanderbilt, who paved it over and built a giant freight terminal for his Hudson River Railroad. The chapel was demolished in 1918. The fashionable families had already fled uptown.
+
+Trains used to run down the middle of the West Side streets, at street level. Tenth Avenue, in Chelsea, was nicknamed Death Avenue because of the number of people killed by freight trains. In the 1930s, the New York Central Railroad built the West Side Improvement Project, which lifted the trains onto an elevated viaduct. That viaduct is what we now know as the High Line. Its southern end was right here: freight trains rolled directly into the third floor of this building, which opened in 1934, so that goods could be unloaded straight into storage.
+
+As trucking took over, the rail line was cut back. The southern portion, including the connection to this building, was demolished in the early 1990s. If you look at the building's north end, you may notice where the old rail tracks once entered.
+
+In recent years, Google acquired and rebuilt the terminal as a major office, adding new floors above the old freight structure. It's part of a broader reinvention of Hudson Square. The neighborhood, much of which is still owned by Trinity Church's real estate arm, was the printing district for most of the twentieth century. The big industrial buildings with heavy floors, built to hold the weight of printing presses, now hold offices for media and tech companies. The Walt Disney Company has also built its New York headquarters a few blocks south.
+
+As you head south, you'll pass the entrance to the Holland Tunnel, which opened in 1927 under the Hudson River to Jersey City. It was the first mechanically ventilated underwater vehicle tunnel in the world. Its chief engineer, Clifford Holland, died during construction, possibly from the stress and exhaustion of the job, and the tunnel was named after him. Huge ventilation buildings on both sides of the river exchange the air inside the tunnel every ninety seconds.
+=== STOP Hook & Ladder 8 & the Heart of Tribeca @ 40.7196,-74.0066
+At the corner of North Moore Street and Varick Street stands a small, ornate Beaux-Arts firehouse. This is the home of Hook and Ladder Company 8, completed in 1903. With its red doors, rusticated stone, and elaborate cornice, it shows how seriously the city took its civic architecture at the turn of the century. Even a firehouse was meant to look like a small palace.
+
+The building became internationally famous as the headquarters of the paranormal exterminators in the 1984 film Ghostbusters. Fans still come here to take pictures, and the firefighters inside have embraced the connection; there's often a Ghostbusters sign displayed inside.
+
+But this firehouse also has a quieter history. The firefighters of Ladder 8 responded to the World Trade Center on September eleventh, 2001. Fire stations throughout lower Manhattan lost members that day.
+
+Tribeca itself, as a name, is a recent invention. In the 1970s, artists began moving into the abandoned warehouses south of Canal Street, following the same path as in SoHo. Real estate brokers and residents called the area the Triangle Below Canal, and shortened it to Tribeca. Today it is one of the most expensive neighborhoods in the United States, home to celebrities and finance executives who live in converted warehouses with eighteen-foot ceilings.
+
+After September eleventh, the neighborhood, just north of the World Trade Center, was deeply affected. To help bring people back downtown, the actor Robert De Niro, the producer Jane Rosenthal, and the investor Craig Hatkoff founded the Tribeca Film Festival in 2002. De Niro had long been invested in the neighborhood: his company, Tribeca Productions, was based in a former coffee warehouse nearby, in what's now called the Tribeca Film Center.
+
+As you walk the streets around here, North Moore, Franklin, White, and Walker, notice the dense collection of handsome nineteenth century warehouses, many with their loading docks still intact. These buildings once held dry goods, textiles, and groceries on their way to stores across the city and the country.
+=== STOP Harrison Street & the Lost Washington Market @ 40.7189,-74.0108
+You're on Harrison Street, near Greenwich Street. Look at the row of small brick houses with peaked roofs and dormer windows. These are Federal-style townhouses, built in the late 1700s and early 1800s, when this was a residential neighborhood for merchants and artisans. Several of them weren't originally here: in the 1970s, as urban renewal swept through the area, a few of these historic houses were moved from nearby Washington Street to save them from demolition and reassembled here.
+
+That urban renewal was aimed at what was once the largest wholesale food market in the city: the Washington Market. Founded in the early 1800s, it spread over many blocks along the Hudson waterfront. By the late nineteenth and early twentieth centuries, it was the place where much of New York's fresh food, fruits, vegetables, meat, poultry, came into the city by boat and rail and was sold to grocers, restaurants, and pushcart peddlers. The area was chaotic, crowded, and notoriously congested, with trucks jammed in the streets day and night.
+
+In the 1950s and 60s, city planners decided the market was obsolete and should move to a modern facility. The wholesale produce trade moved to Hunts Point in the Bronx in the 1960s, where it still operates as one of the largest food distribution centers in the world. Most of the Washington Market area was demolished. Part of it became the site of the original World Trade Center. Part became Independence Plaza, the large apartment towers you see nearby, and part became Manhattan Community College.
+
+Just to the south and east, the area around Duane Park, a small triangular park, was the city's butter and egg district. Dairy wholesalers clustered around here, and the old warehouses still bear names of food businesses on their facades. Duane Park itself has a curious origin: the city bought the land from Trinity Church in 1797 for the price of five dollars. It was originally part of a farm owned by a Dutch woman named Annetje Jans in the 1600s.
+
+One survivor of the food trade was the Bazzini nut company, which roasted and sold nuts in Tribeca from the late 1800s until the 2000s, when it, too, moved out to the Bronx, and its building became apartments. Today, the only market in Washington Market Park is the playground. But walk around and you'll see the old names, still carved into stone.
+=== STOP Telecom Fortresses: 33 Thomas Street & 60 Hudson @ 40.7159,-74.0058
+At the corner of Thomas Street and Church Street, look up at the strangest building in Tribeca: a massive, windowless tower of concrete and granite, with no windows at all, just a few vents near the top. This is 33 Thomas Street, completed in 1974 for AT&T, and originally known as the Long Lines Building.
+
+It was designed to house telephone switching equipment, not people. Its architects designed it to withstand a nuclear blast and to be self-sufficient for up to two weeks in a disaster, with its own fuel and water supplies. Its floors are unusually tall, to accommodate large equipment. In 2016, an investigation by The Intercept and a documentary drew on leaked documents to report that the building was likely a site where the National Security Agency monitored international communications. Whatever happens inside, it remains one of the city's great architectural enigmas, a building designed for machines.
+
+A short walk away, at 60 Hudson Street, stands another telecom landmark: the Western Union Building, completed in 1930. Look at its brickwork. The bricks shift gradually in color from dark at the bottom to light at the top, in a subtle gradient, an Art Deco flourish. Western Union was the telegraph monopoly of the nineteenth and early twentieth centuries, the company that wired news, stock prices, and money across the country. This building was its headquarters and its nerve center.
+
+Today 60 Hudson is one of the most important internet hubs in the world, a so-called carrier hotel. Dozens of telecommunications companies and data networks connect their equipment inside, because the building sits at the junction of major fiber optic routes. The same reasons that made it valuable for telegraph lines a century ago, being a central point where cables converge, make it valuable for internet traffic today. When you send data from New York to London, there's a decent chance it passes through this building.
+
+There's a nice continuity here. Western Union's telegraph, AT&T's telephones, and today's fiber optic networks have all occupied the same few blocks of Tribeca. The infrastructure of communication is sticky: once the cables are in the ground, the buildings keep their importance, even when the technology inside changes completely.
+=== STOP Greene Street Cast Iron @ 40.7220,-74.0024
+Welcome to SoHo, and to Greene Street, one of the most beautiful streets in New York. Look at the facades on both sides: rows of columns, arches, and ornate details, stacked five or six stories high. Most of this is not stone. It's cast iron.
+
+Here's a test: if you carry a small magnet, put it against one of the columns. It'll stick.
+
+Cast iron architecture flourished in New York from the 1850s to the 1880s. It was an early form of mass production in building. Foundries cast facade pieces, columns, capitals, window frames, cornices, from molds, and those parts could be ordered from a catalog, shipped to the site, and bolted together. This allowed builders to imitate the look of expensive carved stone palaces, Venetian, French, or Italian Renaissance, at a fraction of the cost. It also allowed for large windows, since the iron was strong enough to carry loads with thin supports. In an era before electric light, big windows meant more daylight for workers.
+
+Two names to know are James Bogardus, an inventor who promoted cast iron construction in the 1840s and 50s, and Daniel Badger, whose Architectural Iron Works produced facades for buildings across the country.
+
+The buildings were usually painted to look like stone, often in cream, gray, or white. Look for 28 to 30 Greene Street, a grand building with a mansard roof, known as the Queen of Greene Street, and farther north, 72 to 76 Greene Street, known as the King of Greene Street, with its tall columns and projecting central bay.
+
+These buildings mostly housed textile and dry goods businesses: wholesalers of fabric, clothing, and household goods. Ground floors held showrooms. Upper floors held stock or light manufacturing. Despite the iron, fires were common, since the contents were flammable and the iron could buckle under heat. Firefighters called the district Hell's Hundred Acres.
+
+By the 1960s, the buildings were nearly empty. That's when artists came. They found the open loft floors perfect for large canvases and sculpture. Look for small signs reading A.I.R. near the doorways of some buildings, short for Artist in Residence. They told firefighters that people, not just goods, lived in the building, which was important in buildings never designed for residential use.
+=== STOP The Haughwout Building & the First Passenger Elevator @ 40.7213,-73.9997
+At the corner of Broadway and Broome Street stands one of the most important commercial buildings in American history: the Haughwout Building, completed in 1857.
+
+Look at the facade. It's a cast iron recreation of a Venetian palace, inspired by the Sansovino Library in Venice, with rows of arched windows framed by columns, repeated over five stories. The rhythm is hypnotic, and it's one of the purest expressions of the cast iron style.
+
+The building was built for E. V. Haughwout and Company, a retailer of fine china, glassware, silver, and chandeliers. It was a luxury store, comparable to Tiffany and Company, which was located nearby on Broadway at the time. Haughwout's customers reportedly included the White House: the company is said to have supplied china for Mary Todd Lincoln.
+
+But the building's real claim to fame is inside. In 1857, it became the first commercial building in the world to install a passenger elevator, built by Elisha Graves Otis. A few years earlier, at the 1854 Crystal Palace exhibition in New York, Otis had staged a dramatic demonstration. He rode a platform high into the air and then had the rope holding it cut. Instead of plunging, the platform stopped, held by his safety brake, a spring-loaded mechanism that locked into the guide rails if the cable failed. All safe, gentlemen, he reportedly announced.
+
+The problem with early elevators wasn't lifting; it was falling. Otis solved the problem of trust. Without the safety elevator, the skyscraper would have been impossible, because no one would rent an office on the twentieth floor if they had to climb twenty flights of stairs, or if they feared riding up a rope. The Haughwout elevator, powered by a steam engine in the basement, was the first step toward the vertical city.
+
+The company Otis founded, the Otis Elevator Company, became the largest elevator maker in the world, and still is one of the leaders. You've probably ridden in one of its elevators today. Look for the name on the inspection plate the next time you step into an elevator in an office building.
+
+Broadway itself, through SoHo, was once a premier shopping street of the city, before the retail center migrated north to Ladies' Mile and later to Fifth Avenue. In a way, the boutiques here now have returned the street to what it was in the 1850s.
+=== STOP The Little Singer Building & SoHo's Galleries @ 40.7245,-73.9978
+On Broadway, just north of Prince Street, look for the building at 561 Broadway with an unusual facade: a delicate lattice of green-painted iron, terracotta, and huge sheets of glass, with ornamental balconies. This is the Little Singer Building, completed in 1904 and designed by Ernest Flagg.
+
+It was built for the Singer Manufacturing Company, the maker of the famous sewing machine. Singer is one of the great stories in American business history. Isaac Merritt Singer, a colorful inventor and actor with a complicated personal life, patented improvements to the sewing machine in the 1850s. But his business partner, Edward Clark, a lawyer, came up with the innovations that made the company a giant: installment payments, which allowed families to buy an expensive machine a little at a time, and a direct sales force. Singer became one of the first truly multinational American companies, with factories and salesmen around the world. It also helped transform the garment industry, making mass production of clothing possible, including in the sweatshops of the Lower East Side.
+
+Flagg's design here was strikingly modern: the facade is mostly glass, with a thin metal framework, anticipating the glass curtain walls of twentieth century skyscrapers. A few years later, Flagg designed the much taller Singer Tower downtown, which in 1908 was briefly the tallest building in the world. Tragically, that tower was demolished in 1968, among the tallest buildings ever deliberately demolished at the time.
+
+Look around you now at SoHo's streets: Prince, Spring, Mercer, Wooster, West Broadway. In the 1970s and 80s, this was the center of the art world. The dealer Leo Castelli, who championed artists like Jasper Johns, Robert Rauschenberg, Roy Lichtenstein, and Andy Warhol, opened a gallery at 420 West Broadway in 1971, and dozens of galleries followed. Artists like Donald Judd bought entire buildings here. Judd's home and studio, at 101 Spring Street, a cast iron building he bought in 1968, is preserved as a museum.
+
+In 1977, a gourmet food store called Dean and DeLuca opened on Prince Street, introducing many Americans to imported cheeses, olive oils, and specialty foods. The store became an emblem of the neighborhood's transformation. By the 1990s and 2000s, most of the galleries had moved to Chelsea, driven out by rising rents, and SoHo became a high end shopping district. Apple opened its first New York store in a former post office on Prince Street in 2002.
+
+Before you leave, look up at the cornices, columns, and window frames above the shop signs. The ground floors have changed many times, but the iron facades above have watched over all of it: textile merchants, firefighters, artists, collectors, and shoppers.
