@@ -1,12 +1,12 @@
 # Walk NYC — voice bakeoff and recording
 
-This folder turns the 184 narration tracks (22 overviews + 162 stops) into audio files the app plays instead of the phone voice. Recorded audio keeps playing with the screen locked, and the transcript still highlights sentence by sentence.
+This folder turns the narration tracks (22 overviews, 162 stops, and each stop's "Go deeper" chapters) into audio files the app plays instead of the phone voice. Recorded audio keeps playing with the screen locked, and the transcript still highlights sentence by sentence.
 
 ## Contents
 
 | File | What it is |
 |---|---|
-| `tracks.json` | All narration text, one entry per track |
+| `tracks.json` | All narration text, one entry per track (made by `build.py`; chapter tracks are named like `fidi-01-d2`) |
 | `sample.txt` | A ~75-second bakeoff passage: Wall Street, the 1920 bombing, Bethesda |
 | `render_kokoro.py` | Open-weights neural voice (Kokoro-82M). Linux/GPU; also runs on CPU, more slowly |
 | `render_mac.py` | macOS built-in voices, including downloaded Premium ones. Nothing to install |
@@ -39,7 +39,8 @@ python3 render_mac.py --all --voice "Zoe (Premium)"    # if a Mac voice won
 ```
 - Add `--limit 3` first if you want a quick test.
 - Runs are resumable: rerun the same command after an interruption and finished tracks are skipped.
-- Output goes to `out/audio/`: one file per track, plus `manifest.json` with each sentence's start time. Expect roughly 200 MB for ~7 hours.
+- Output goes to `out/audio/`: one file per track, plus `manifest.json` with each sentence's start time. Expect roughly 200 MB for the ~7 hours of stops, and about twice that again for the Go deeper chapters.
+- When new chapters are added, the same command records just the new tracks.
 - Rough timing (not measured): Kokoro on the A40 should take minutes. `say` on a Mac may take an hour or so.
 
 ## Step 3 — publish
