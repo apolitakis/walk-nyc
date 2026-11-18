@@ -39,7 +39,7 @@ Paragraphs separated by blank lines.
 === STOP Stop Title @ 40.7036,-74.0168
 Paragraphs.
 ```
-Write for the ear: spell out abbreviations ("Street", not "St."), avoid symbols, and keep the second-person "look up at…" voice. Pronunciation fixes live in two places that must match: `SPEAK_FIX` in `index.html` and `voices/common.py`. Flag legends as legends; keep claims you aren't sure of out. Stop coordinates were hand-placed: when a note says a stop triggered late or early, fix its `@ lat,lng`.
+Write for the ear: spell out abbreviations ("Street", not "St."), avoid symbols, and keep the second-person "look up at…" voice. The recorded voice (Kokoro) tends to spell out all-caps words it doesn't know, so write an acronym that is said as a word in title case (Charas, Ascap), and write "September 11th", not "9/11". Pronunciation fixes live in two places that must match: `SPEAK_FIX` in `index.html` and `voices/common.py`. Flag legends as legends; keep claims you aren't sure of out. Stop coordinates were hand-placed: when a note says a stop triggered late or early, fix its `@ lat,lng`.
 
 "Go deeper" chapters (`content/deeper/NN-<tour>.txt`):
 ```
