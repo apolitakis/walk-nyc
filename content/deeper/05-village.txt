@@ -234,7 +234,7 @@ In the 1920s, a physicist named Harvey Fletcher led research here into human hea
 
 Another engineer, Homer Dudley, worked on taking speech apart. Beginning in the late 1920s, he developed the vocoder, which broke a voice into its basic components so that it could be sent more efficiently and rebuilt at the other end. Then he built a machine that could speak with no human voice at all: the Voder, shown at the 1939 World's Fair in Queens. A trained operator played it like an organ, with keys and a foot pedal, and astonished crowds heard it say whole sentences.
 
-The vocoder went to war. During the Second World War, Bell Labs built its principles into a secret system called SIGSALY, which scrambled the telephone conversations of Allied leaders, including Winston Churchill and Franklin Roosevelt, so the enemy couldn't listen in.
+The vocoder went to war. During the Second World War, Bell Labs built its principles into a secret system called Sigsaly, which scrambled the telephone conversations of Allied leaders, including Winston Churchill and Franklin Roosevelt, so the enemy couldn't listen in.
 
 After the war, the vocoder found a second life in music, giving robotic voices to electronic and pop records, most famously those of the German band Kraftwerk.
 
