@@ -18,7 +18,7 @@ Because the app loads `https://walk-nyc.pages.dev`, **content and web fixes reac
 | Encryption question | answered in Info.plist (`ITSAppUsesNonExemptEncryption` = NO; the app only uses HTTPS) |
 | Privacy manifest | `App/PrivacyInfo.xcprivacy`: no tracking; precise location and note text sent with feedback notes, not linked to the user; UserDefaults reason CA92.1 |
 | Background modes | Audio only. Geofences use `CLMonitor`, which wakes the app without the "Location updates" background mode, and leaving that mode on is a common App Review rejection. |
-| Privacy policy | `hosting/cloudflare/public/privacy.html` → `https://walk-nyc.pages.dev/privacy.html` (live after the next ship) |
+| Privacy policy | `hosting/cloudflare/public/privacy.html` → `https://walk-nyc.pages.dev/privacy` (live after the next ship) |
 | Upload | `scripts/testflight.sh` + `ExportOptions.plist` |
 
 ## One-time setup (Alex)
@@ -55,7 +55,7 @@ Friends who aren't on your App Store Connect team are **external testers**, so t
 1. TestFlight → **Test Information** (left sidebar):
    - Beta App Description: *Audio walking tours of Manhattan and Brooklyn. Pick a tour, start walking mode, and each stop's story plays when you get there, even with your phone in your pocket. Tap the pencil to send a note about anything that's wrong or could be better.*
    - Feedback Email: your email.
-   - Privacy Policy URL: `https://walk-nyc.pages.dev/privacy.html`
+   - Privacy Policy URL: `https://walk-nyc.pages.dev/privacy`
    - Beta App Review Information: your name, phone and email. Sign-in required: **off**.
    - Review notes (paste):
      > Walk NYC plays recorded walking-tour narration. Location is used to start each stop's audio on arrival, including with the phone locked (iOS region monitoring), which is why it asks for "Always" location. Reviewers outside New York can open any tour and tap a stop to play it; arrival triggers only fire in Manhattan and Brooklyn. No account or login.
