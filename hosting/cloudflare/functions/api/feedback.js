@@ -1,5 +1,6 @@
 // Walk-time feedback notes.
-//   POST /api/feedback  {note, tour, stop, stopTitle, sentence, lat, lng, acc, app, at}  -> stores one note in KV
+//   POST /api/feedback  {note, tour, stop, stopTitle, deeper, chapterTitle, sentence, lat, lng, acc, app, at}  -> stores one note in KV
+//   (deeper = the "Go deeper" chapter number, 1-based, when the note was written during a chapter)
 //   GET  /api/feedback  with header "x-feedback-key: <FEEDBACK_KEY>" (or ?key=)  -> {notes:[...]} newest first
 // Bindings (wrangler.toml / Pages settings): FEEDBACK = KV namespace; FEEDBACK_KEY = secret for reading.
 
@@ -18,6 +19,7 @@ export async function onRequestPost({ request, env }) {
   const entry = {
     id: crypto.randomUUID(), at, clientAt: str(b.at, 40), note: note.trim(),
     tour: str(b.tour, 64), stop: Number.isInteger(b.stop) ? b.stop : null, stopTitle: str(b.stopTitle, 200),
+    deeper: Number.isInteger(b.deeper) ? b.deeper : null, chapterTitle: str(b.chapterTitle, 200),
     sentence: str(b.sentence, 1000), lat: num(b.lat), lng: num(b.lng), acc: num(b.acc),
     app: str(b.app, 32), ua: str(request.headers.get("user-agent"), 200),
   };
