@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.3 — 2026-11-18
+- Privacy page at /privacy.html (the privacy policy link for TestFlight). No change to the app itself.
+
 ## 0.3.2 — 2026-11-17
 - iOS app support: when running inside the Capacitor wrapper, walking mode registers the tour's stops as native geofences so stops trigger with the phone locked, with arrivals from GPS and geofences sharing one path. Shows "You can lock your phone" in the walking banner inside the app only. No change in a normal browser.
 
